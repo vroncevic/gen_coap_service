@@ -1,6 +1,6 @@
 <img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/gen_coap_service_logo.png" width="25%">
 
-# Generate Unnamed Pipe
+# Generate CoAP modules
 
 **gen_coap_service** is tool for generation of CoAP modules.
 

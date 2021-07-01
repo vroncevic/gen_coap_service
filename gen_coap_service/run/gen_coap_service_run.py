@@ -1,32 +1,35 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-# gen_coap_service_run.py
-# Copyright (C) 2018 Vladimir Roncevic <elektron.ronca@gmail.com>
-#
-# gen_coap_service is free software: you can redistribute it and/or modify it
-# under the terms of the GNU General Public License as published by the
-# Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# gen_coap_service is distributed in the hope that it will be useful, but
-# WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-# See the GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License along
-# with this program. If not, see <http://www.gnu.org/licenses/>.
-#
+
+"""
+ Module
+     gen_coap_service_run.py
+ Copyright
+     Copyright (C) 2020 Vladimir Roncevic <elektron.ronca@gmail.com>
+     gen_coap_service is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by the
+     Free Software Foundation, either version 3 of the License, or
+     (at your option) any later version.
+     gen_coap_service is distributed in the hope that it will be useful, but
+     WITHOUT ANY WARRANTY; without even the implied warranty of
+     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+     See the GNU General Public License for more details.
+     You should have received a copy of the GNU General Public License along
+     with this program. If not, see <http://www.gnu.org/licenses/>.
+ Info
+     Generator main entry point.
+"""
 
 import sys
 
 try:
-    from gen_coap_service import gen_coap_service
-except ImportError as e:
-    msg = "\n{0}\n{1}\n".format(__file__, e)
-    sys.exit(msg)  # Force close python ATS ##################################
+    from gen_coap_service import GenCoAPService
+except ImportError as error:
+    MESSAGE = "\n{0}\n{1}\n".format(__file__, error)
+    sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2018, Free software to use and distributed it.'
+__copyright__ = 'Copyright 2020, Free software to use and distributed it.'
 __credits__ = ['Vladimir Roncevic']
 __license__ = 'GNU General Public License (GPL)'
 __version__ = '1.0.0'
@@ -36,6 +39,6 @@ __status__ = 'Updated'
 
 if __name__ == '__main__':
 
-    tool = gen_coap_service(verbose=False)
-    tool.process(verbose=False)
+    TOOL = GenCoAPService(verbose=False)
+    TOOL.process(verbose=False)
 
