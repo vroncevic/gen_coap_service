@@ -30,6 +30,10 @@ other information that should be provided before the modules are installed.
 
 ### Installation
 
+Used next development environment
+
+![Development environment](https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/debtux.png)
+
 ![Install Python2 Package](https://github.com/vroncevic/gen_coap_service/workflows/Install%20Python2%20Package%20gen_coap_service/badge.svg?branch=master) ![Install Python3 Package](https://github.com/vroncevic/gen_coap_service/workflows/Install%20Python3%20Package%20gen_coap_service/badge.svg?branch=master)
 
 Currently there are three ways to install tool:
@@ -89,7 +93,7 @@ Base flow of generation process:
 
 ### Tool structure
 
-**gen_coap_service** is based on OOP:
+**gen_coap_service** is based on OOP.
 
 Generator structure:
 
