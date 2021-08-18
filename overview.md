@@ -28,6 +28,33 @@ through simple proxies.
 Because CoAP is datagram based, it may be used on top of SMS and other packet
 based communications protocols.
 
+The interaction model of CoAP is similar to the client/server model of HTTP.
+However, machine-to-machine interactions typically result in a CoAP
+implementation acting in both client and server roles. A CoAP request is
+equivalent to that of HTTP and is sent by a client to request an action
+(using a Method Code) on a resource (identified by a URI) on a server.
+The server then sends a response with a Response Code; this response may
+include a resource representation.
+
+Unlike HTTP, CoAP deals with these interchanges asynchronously over a
+datagram-oriented transport such as UDP. This is done logically using a layer
+of messages that supports optional reliability (with exponential back-off).
+CoAP defines four types of messages: Confirmable, Non-confirmable,
+Acknowledgement, Reset. Method Codes and Response Codes included in some of
+these messages make them carry requests or responses. The basic exchanges of
+the four types of messages are somewhat orthogonal to the request/response
+interactions; requests can be carried in Confirmable and Non-confirmable
+messages, and responses can be carried in these as well as piggybacked in
+Acknowledgement messages.
+
+One could think of CoAP logically as using a two-layer approach, a CoAP
+messaging layer used to deal with UDP and the asynchronous nature of the
+interactions, and the request/response interactions using Method and Response
+Codes. CoAP is however a single protocol, with messaging and request/response
+as just features of the CoAP header.
+
+![Abstract layering of CoAP](https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/abstract_layering_of_coap.png)
+
 ### Application Level QoS
 
 Requests and response messages may be marked as “confirmable” or

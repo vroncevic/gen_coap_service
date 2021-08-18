@@ -85,7 +85,7 @@ You can use docker to create image/container.
 
 Base flow of generation process:
 
-![alt tag](https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/gen_coap_service_flow.png)
+![CoAP generation flow](https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/gen_coap_service_flow.png)
 
 ### Tool structure
 
@@ -103,6 +103,7 @@ Generator structure:
 
 More documentation and info at:
 * [gen_coap_service.readthedocs.io](https://gen_coap_service.readthedocs.io/en/latest/)
+* [CoAP Service](overview.md)
 * [www.python.org](https://www.python.org/)
 
 ### Copyright and Licence
