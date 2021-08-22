@@ -8,19 +8,26 @@ Resource Environments) IETF group.
 Like HTTP, CoAP is a document transfer protocol. Unlike HTTP, CoAP is designed
 for the needs of constrained devices.
 
-CoAP packets are much smaller than HTTP TCP flows. Bitfields and mappings from
-strings to integers are used extensively to save space. Packets are simple to
-generate and can be parsed in place without consuming extra RAM in constrained
-devices.
+CoAP packets (4 bytes minimum) are much smaller than HTTP TCP flows.
+Bitfields and mappings from strings to integers are used extensively to
+save space. Packets are simple to generate and can be parsed in place
+without consuming extra RAM in constrained devices.
+
+Based on message model, four message types are defined, and the message is
+the data communication carrier, and the data communication between devices
+is realized by exchanging network messages.
 
 CoAP runs over UDP, not TCP. Clients and servers communicate through
 connectionless datagrams. Retries and reordering are implemented in the
 application stack. Removing the need for TCP may allow full IP networking
 in small microcontrollers. CoAP allows UDP broadcast and multicast to be
-used for addressing.
+used for addressing (which can send requests to multiple devices at the
+same time (such as CoAP client search for CoAP Server)).
 
 CoAP follows a client/server model. Clients make requests to servers, servers
-send back responses. Clients may GET, PUT, POST and DELETE resources.
+send back responses (both parties can be in the client or server role).
+Clients may GET, PUT, POST and DELETE resources. The request and response
+packets are placed in the CoAP message for transmission.
 
 CoAP is designed to interoperate with HTTP and the RESTful web at large
 through simple proxies.
