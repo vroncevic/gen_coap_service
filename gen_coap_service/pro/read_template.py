@@ -1,43 +1,43 @@
 # -*- coding: UTF-8 -*-
 
-"""
+'''
  Module
      read_template.py
  Copyright
      Copyright (C) 2020 Vladimir Roncevic <elektron.ronca@gmail.com>
-     gen_autoconf is free software: you can redistribute it and/or modify it
-     under the terms of the GNU General Public License as published by the
+     gen_coap_service is free software: you can redistribute it and/or modify
+     it under the terms of the GNU General Public License as published by the
      Free Software Foundation, either version 3 of the License, or
      (at your option) any later version.
-     gen_autoconf is distributed in the hope that it will be useful, but
+     gen_coap_service is distributed in the hope that it will be useful, but
      WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
      See the GNU General Public License for more details.
      You should have received a copy of the GNU General Public License along
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
-     Define class ReadTemplate with attribute(s) and method(s).
-     Read a template (setup.template) and return a string representation.
-"""
+     Defined class ReadTemplate with attribute(s) and method(s).
+     Created API for read a template file and return a content.
+'''
 
 import sys
-from inspect import stack
-from os.path import isdir
+from os.path import isdir, dirname, realpath
 
 try:
-    from pathlib import Path
-    from ats_utilities.config.file_checking import FileChecking
+    from ats_utilities.checker import ATSChecker
+    from ats_utilities.config_io.base_check import FileChecking
     from ats_utilities.console_io.verbose import verbose_message
+    from ats_utilities.config_io.yaml.yaml2object import Yaml2Object
     from ats_utilities.exceptions.ats_type_error import ATSTypeError
     from ats_utilities.exceptions.ats_bad_call_error import ATSBadCallError
-except ImportError as error:
-    MESSAGE = "\n{0}\n{1}\n".format(__file__, error)
+except ImportError as ats_error_message:
+    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
     sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2020, Free software to use and distributed it.'
+__copyright__ = 'Copyright 2020, https://vroncevic.github.io/gen_coap_service'
 __credits__ = ['Vladimir Roncevic']
-__license__ = 'GNU General Public License (GPL)'
+__license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
 __version__ = '1.0.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
@@ -45,39 +45,37 @@ __status__ = 'Updated'
 
 
 class ReadTemplate(FileChecking):
-    """
-        Define class ReadTemplate with attribute(s) and method(s).
-        Read a template and return a string representation.
+    '''
+        Defined class ReadTemplate with attribute(s) and method(s).
+        Created API for read a template file and return a content.
         It defines:
 
             :attributes:
-                | __slots__ - Setting class slots
-                | VERBOSE - Console text indicator for current process-phase
-                | __TEMPLATE_DIR - Prefix path to templates
-                | __template_dir - Absolute template dir
+                | GEN_VERBOSE - console text indicator for process-phase.
+                | TEMPLATE_DIR - template dir path.
+                | __template_dir - absolute file path of template dir.
             :methods:
-                | __init__ - Initial constructor
-                | get_template_dir - Getter for template dir path
-                | read - Read a template and return a content or None
-    """
+                | __init__ - initial constructor.
+                | get_template_dir - getter for template directory object.
+                | read - read a template and return a string representation.
+                | __str__ - dunder method for ReadTemplate.
+    '''
 
-    __slots__ = ('VERBOSE', '__TEMPLATE_DIR', '__template_dir')
-    VERBOSE = 'GEN_AUTOCONF::PRO::READ_TEMPLATE'
-    __TEMPLATE_DIR = '/../conf/template'
+    GEN_VERBOSE = 'GEN_COAP_SERVICE::PRO::READ_TEMPLATE'
+    TEMPLATE_DIR = '/../conf/template/'
 
     def __init__(self, verbose=False):
-        """
-            Setting template configuration directory.
+        '''
+            Initial constructor.
 
-            :param verbose: Enable/disable verbose option
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :exceptions: None
-        """
-        verbose_message(ReadTemplate.VERBOSE, verbose, 'Initial reader')
+        '''
         FileChecking.__init__(self, verbose=verbose)
-        current_dir = Path(__file__).parent
-        template_dir = "{0}{1}".format(
-            current_dir, ReadTemplate.__TEMPLATE_DIR
+        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'init reader')
+        template_dir = '{0}{1}'.format(
+            dirname(realpath(__file__)), ReadTemplate.TEMPLATE_DIR
         )
         check_template_dir = isdir(template_dir)
         if check_template_dir:
@@ -86,40 +84,64 @@ class ReadTemplate(FileChecking):
             self.__template_dir = None
 
     def get_template_dir(self):
-        """
-            Getter for template dir path.
+        '''
+            Getter for template directory.
 
-            :return: Template dir path
-            :rtype: <str>
-            :exceptions: None
-        """
+            :return: template directory path | None.
+            :rtype: <str> | <NoneType>
+        '''
         return self.__template_dir
 
-    def read(self, template, verbose=False):
-        """
-            Read a template and return a content.
+    def read(self, template_setup, verbose=False):
+        '''
+            Read template structure.
 
-            :param template: File name
-            :type template: <str>
-            :param verbose: Enable/disable verbose option
+            :param template_setup: template setup module name.
+            :type template_setup: <str>
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: Template content | None
-            :rtype: <str> | <NoneType>
-            :exceptions: ATSBadCallError | ATSTypeError
-        """
-        func, template_file_exists = stack()[0][3], None
-        module_content, template_file = False, None
-        template_txt = 'Argument: expected module_type <int> object'
-        template_msg = "{0} {1} {2}".format('def', func, template_txt)
-        if template is None:
-            raise ATSBadCallError(template_msg)
-        if not isinstance(template, str):
-            raise ATSTypeError(template_msg)
-        template_file = "{0}/{1}".format(self.__template_dir, template)
-        template_file_exists = self.check_file(
-            file_path=template_file, verbose=verbose
+            :return: template content for setup module | None.
+            :rtype: <dict> | <NoneType>
+            :exceptions: ATSTypeError | ATSBadCallError
+        '''
+        checker, error, status = ATSChecker(), None, False
+        error, status = checker.check_params([
+            ('str:template_setup', template_setup)
+        ])
+        if status == ATSChecker.TYPE_ERROR:
+            raise ATSTypeError(error)
+        if status == ATSChecker.VALUE_ERROR:
+            raise ATSBadCallError(error)
+        yml2obj, setup_content, template_setup_path = None, {}, None
+        verbose_message(ReadTemplate.GEN_VERBOSE, verbose, 'load template')
+        template_setup_path = '{0}{1}'.format(
+            self.__template_dir, template_setup
         )
-        if template_file_exists:
-            with open(template_file, 'r') as template:
-                module_content = template.read()
-        return module_content
+        self.check_path(template_setup_path, verbose=verbose)
+        self.check_mode('r', verbose=verbose)
+        self.check_format(template_setup_path, 'yaml', verbose=verbose)
+        if self.is_file_ok():
+            yml2obj = Yaml2Object(template_setup_path)
+            setup_project = yml2obj.read_configuration()
+            templates = setup_project['templates']
+            modules = setup_project['modules']
+            for template_file, module_file in zip(templates, modules):
+                template_file_path = '{0}{1}'.format(
+                    self.__template_dir, template_file
+                )
+                with open(template_file_path, 'r') as setup_template:
+                    setup_content[module_file] = setup_template.read()
+        return setup_content
+
+    def __str__(self):
+        '''
+            Dunder method for ReadTemplate.
+
+            :return: object in a human-readable format.
+            :rtype: <str>
+            :exceptions: None
+        '''
+        return '{0} ({1}, {2})'.format(
+            self.__class__.__name__, FileChecking.__str__(self),
+            self.__template_dir
+        )

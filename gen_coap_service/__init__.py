@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 
-"""
+'''
  Module
      __init__.py
  Copyright
@@ -16,113 +16,183 @@
      You should have received a copy of the GNU General Public License along
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
-     Define class GenCoAPService with attribute(s) and method(s).
-     Load a settings, create a CL interface and run operation(s).
-"""
+     Defined class GenCoAPService with attribute(s) and method(s).
+     Load a base info, create an CLI interface and run operation(s).
+'''
 
 import sys
+from os.path import exists, dirname, realpath
 
 try:
-    from pathlib import Path
-    from gen_coap_service.pro.gen_pro import GenPro
-    from ats_utilities.cfg_base import CfgBase
+    from six import add_metaclass
+    from gen_coap_service.pro import GenCoAPServiceSetup
+    from ats_utilities.splash import Splash
+    from ats_utilities.logging import ATSLogger
+    from ats_utilities.cli.cfg_cli import CfgCLI
+    from ats_utilities.cooperative import CooperativeMeta
     from ats_utilities.console_io.error import error_message
     from ats_utilities.console_io.verbose import verbose_message
     from ats_utilities.console_io.success import success_message
-except ImportError as error:
-    MESSAGE = "\n{0}\n{1}\n".format(__file__, error)
+except ImportError as ats_error_message:
+    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
     sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2020, Free software to use and distributed it.'
+__copyright__ = 'Copyright 2020, https://vroncevic.github.io/gen_coap_service'
 __credits__ = ['Vladimir Roncevic']
-__license__ = 'GNU General Public License (GPL)'
+__license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
 __version__ = '1.0.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class GenCoAPService(CfgBase):
-    """
-        Define class GenCoAPService with attribute(s) and method(s).
-        Load a settings, create a CL interface and run operation(s).
+@add_metaclass(CooperativeMeta)
+class GenCoAPService(CfgCLI):
+    '''
+        Defined class GenCoAPService with attribute(s) and method(s).
+        Load a base info, create an CLI interface and run operation(s).
         It defines:
 
             :attributes:
-                | __slots__ - Setting class slots
-                | VERBOSE - Console text indicator for current process-phase
-                | __CONFIG - Configuration file path
-                | __OPS - Tool options (list)
+                | GEN_VERBOSE - console text indicator for process-phase.
+                | CONFIG - tool info file path.
+                | LOG - tool log file path.
+                | LOGO - logo for splash screen.
+                | OPS - list of tool options.
+                | logger - logger object API.
             :methods:
-                | __init__ - Initial constructor
-                | process - Process and run tool option(s)
-    """
+                | __init__ - initial constructor.
+                | process - process and run operation.
+                | __str__ - dunder method for GenCoAPService.
+    '''
 
-    __slots__ = ('VERBOSE', '__CONFIG', '__OPS')
-    VERBOSE = 'GEN_COAP_SERVICE'
-    __CONFIG = '/../conf/gen_coap_service.cfg'
-    __OPS = ['-g', '--gen', '-h', '--version', '--verbose']
+    GEN_VERBOSE = 'GEN_COAP_SERVICE'
+    CONFIG = '/conf/gen_coap_service.cfg'
+    LOG = '/log/gen_coap_service.log'
+    LOGO = '/conf/gen_coap_service.logo'
+    OPS = ['-g', '--gen', '-v', '--verbose', '--version']
 
     def __init__(self, verbose=False):
-        """
-            Loading configuration and setting argument options.
+        '''
+            Initial constructor.
 
-            :param verbose: Enable/disable verbose option
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
             :exceptions: None
-        """
-        verbose_message(
-            GenCoAPService.VERBOSE, verbose, 'Initial configuration'
+        '''
+        current_dir = dirname(realpath(__file__))
+        gen_coap_service_property = {
+            'ats_organization': 'vroncevic',
+            'ats_repository': 'gen_coap_service',
+            'ats_name': 'gen_coap_service',
+            'ats_logo_path': '{0}{1}'.format(
+                current_dir, GenCoAPService.LOGO
+            ),
+            'ats_use_github_infrastructure': True
+        }
+        splash = Splash(gen_coap_service_property, verbose=verbose)
+        base_info = '{0}{1}'.format(current_dir, GenCoAPService.CONFIG)
+        CfgCLI.__init__(self, base_info, verbose=verbose)
+        verbose_message(GenCoAPService.GEN_VERBOSE, verbose, 'init tool info')
+        self.logger = ATSLogger(
+            GenCoAPService.GEN_VERBOSE.lower(),
+            '{0}{1}'.format(current_dir, GenCoAPService.LOG),
+            verbose=verbose
         )
-        current_dir = Path(__file__).resolve().parent
-        base_config_file = "{0}{1}".format(
-            current_dir, GenCoAPService.__CONFIG
-        )
-        CfgBase.__init__(self, base_config_file, verbose=verbose)
-        if self.tool_status:
+        if self.tool_operational:
             self.add_new_option(
-                GenCoAPService.__OPS[0],
-                GenCoAPService.__OPS[1],
-                dest='option',
-                help='Option tool'
+                GenCoAPService.OPS[0], GenCoAPService.OPS[1],
+                dest='gen', help='generate option'
+            )
+            self.add_new_option(
+                GenCoAPService.OPS[2], GenCoAPService.OPS[3],
+                action='store_true', default=False,
+                help='activate verbose mode for generation'
+            )
+            self.add_new_option(
+                GenCoAPService.OPS[4], action='version', version=__version__
             )
 
     def process(self, verbose=False):
-        """
+        '''
             Process and run operation.
 
-            :param verbose: Enable/disable verbose option
+            :param verbose: enable/disable verbose option.
             :type verbose: <bool>
-            :return: True (success) | False
+            :return: boolean status, True (success) | False.
             :rtype: <bool>
             :exceptions: None
-        """
+        '''
         status = False
-        if self.tool_status:
+        if self.tool_operational:
             num_of_args_sys = len(sys.argv)
             if num_of_args_sys > 1:
-                option = sys.argv[1]
-                if option not in GenCoAPService.__OPS:
-                    sys.argv = []
+                operation = sys.argv[1]
+                if operation not in GenCoAPService.OPS:
                     sys.argv.append('-h')
             else:
                 sys.argv.append('-h')
-            opts, script = self.parse_args(sys.argv)
-            if all([bool(script), bool(opts.gen), not exists(opts.gen)]):
-                success_message(
-                    GenCoAPService.VERBOSE, 'Generating project', opts.gen
-                )
-                generator, gen_status = GenPro(opts.gen), False
-                gen_status = generator.gen_project()
-                if gen_status:
-                    success_message(GenCoAPService.VERBOSE, 'Done\n')
-                    status = True
+            args = self.parse_args(sys.argv[1:])
+            pro_exists = exists(getattr(args, 'gen'))
+            if not pro_exists:
+                if bool(getattr(args, 'gen')):
+                    print(
+                        '{0} {1} [{2}]'.format(
+                            '[{0}]'.format(GenCoAPService.GEN_VERBOSE.lower()),
+                            'generating', getattr(args, 'gen')
+                        )
+                    )
+                    generator = GenCoAPServiceSetup(verbose=verbose)
+                    status = generator.gen_setup(
+                        getattr(args, 'gen'), verbose
+                    )
+                    if status:
+                        success_message(GenCoAPService.GEN_VERBOSE, 'done\n')
+                        self.logger.write_log(
+                            '{0} {1} done'.format(
+                                'generating tool/gen',
+                                getattr(args, 'gen')
+                            ), ATSLogger.ATS_INFO
+                        )
+                    else:
+                        error_message(
+                            GenCoAPService.GEN_VERBOSE, 'generation failed'
+                        )
+                        self.logger.write_log(
+                            'generation failed', ATSLogger.ATS_ERROR
+                        )
                 else:
                     error_message(
-                        GenCoAPService.VERBOSE, 'Failed to generate project'
+                        GenCoAPService.GEN_VERBOSE, 'provide project name'
                     )
+                    self.logger.write_log(
+                        'provide project name', ATSLogger.ATS_ERROR
+                    )
+            else:
+                error_message(
+                    GenCoAPService.GEN_VERBOSE, 'project already exist'
+                )
+                self.logger.write_log(
+                    'project already exist', ATSLogger.ATS_ERROR
+                )
         else:
-            error_message(GenCoAPService.VERBOSE, 'Tool is not operational')
-        return True if status else False
+            error_message(
+                GenCoAPService.GEN_VERBOSE, 'tool is not operational'
+            )
+            self.logger.write_log(
+                'tool is not operational', ATSLogger.ATS_ERROR
+            )
+        return status
 
+    def __str__(self):
+        '''
+            Dunder method for GenCoAPService.
+
+            :return: object in a human-readable format.
+            :rtype: <str>
+            :exceptions: None
+        '''
+        return '{0} ({1}, {2})'.format(
+            self.__class__.__name__, CfgCLI.__str__(self), str(self.logger)
+        )

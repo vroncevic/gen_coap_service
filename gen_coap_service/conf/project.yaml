@@ -1,0 +1,12 @@
+types:
+    - coapthon
+    - libcoap
+    - node_coap
+    - rpi_pico
+    - cancel
+templates:
+    - template_coapthon.yaml
+    - template_libcoap.yaml
+    - template_node_coap.yaml
+    - template_rpi_pico_coap.yaml
+    - cancel
