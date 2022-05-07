@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-"""
+'''
  Module
      gen_coap_service_run.py
  Copyright
@@ -17,28 +17,26 @@
      You should have received a copy of the GNU General Public License along
      with this program. If not, see <http://www.gnu.org/licenses/>.
  Info
-     Generator main entry point.
-"""
+     Main entry point of tool gen_coap_service.
+'''
 
 import sys
 
 try:
     from gen_coap_service import GenCoAPService
-except ImportError as error:
-    MESSAGE = "\n{0}\n{1}\n".format(__file__, error)
+except ImportError as ats_error_message:
+    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
     sys.exit(MESSAGE)  # Force close python ATS ##############################
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = 'Copyright 2020, Free software to use and distributed it.'
+__copyright__ = 'Copyright 2020, https://vroncevic.github.io/gen_coap_service'
 __credits__ = ['Vladimir Roncevic']
-__license__ = 'GNU General Public License (GPL)'
+__license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
 __version__ = '1.0.0'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 if __name__ == '__main__':
-
     TOOL = GenCoAPService(verbose=False)
     TOOL.process(verbose=False)
-

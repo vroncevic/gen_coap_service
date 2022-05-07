@@ -1,0 +1,6 @@
+templates:
+ - client.template
+ - server.template
+modules:
+ - client.js
+ - server.js
