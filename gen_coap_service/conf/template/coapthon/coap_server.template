@@ -2,22 +2,22 @@
 # -*- coding: UTF-8 -*-
 
 '''
- Module
-     coap_server.py
- Copyright
-     Copyright (C) ${YEAR} Vladimir Roncevic <elektron.ronca@gmail.com>
-     ${PKG} is free software: you can redistribute it and/or modify it
-     under the terms of the GNU General Public License as published by the
-     Free Software Foundation, either version 3 of the License, or
-     (at your option) any later version.
-     ${PKG} is distributed in the hope that it will be useful, but
-     WITHOUT ANY WARRANTY; without even the implied warranty of
-     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-     See the GNU General Public License for more details.
-     You should have received a copy of the GNU General Public License along
-     with this program. If not, see <http://www.gnu.org/licenses/>.
- Info
-     Defined server for CoAP service.
+Module
+    coap_server.py
+Copyright
+    Copyright (C) ${YEAR} Vladimir Roncevic <elektron.ronca@gmail.com>
+    ${PKG} is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+    ${PKG} is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more details.
+    You should have received a copy of the GNU General Public License along
+    with this program. If not, see <http://www.gnu.org/licenses/>.
+Info
+    Defines server for CoAP service.
 '''
 
 import sys
@@ -26,52 +26,40 @@ try:
     from coapthon.server.coap import CoAP
     from basic_resources import BasicResource
 except ImportError as ats_error_message:
-    MESSAGE = '\n{0}\n{1}\n'.format(__file__, ats_error_message)
-    sys.exit(MESSAGE)  # Force close python ATS ##############################
+    # Force close python ATS ##################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
+
 
 class CoAPServer(CoAP):
     '''
-        Defined class DistPyModule with attribute(s) and method(s).
-        Load a base info, create an CLI interface and run operation(s).
-        It defines:
+        Defines class CoAPServer with attribute(s) and method(s).
+        Adds CoAP resource to server.
+
+        It Definess:
 
             :attributes:
-                | GEN_VERBOSE - console text indicator for process-phase.
-                | CONFIG - tool info file path.
-                | LOG - tool log file path.
-                | OPS - list of tool options.
-                | logger - logger object API.
+                | None
             :methods:
-                | __init__ - initial constructor.
-                | process - process and generate module setup.py.
-                | __str__ - dunder method for DistPyModule.
+                | __init__ - Initials CoAPServer constructor.
     '''
+
     def __init__(self, host, port):
         '''
-            Initial constructor.
+            Initials CoAPServer constructor.
 
-            :param verbose: enable/disable verbose option.
+            :param verbose: Enable/Disable verbose option
             :type verbose: <bool>
             :exceptions: None
         '''
         CoAP.__init__(self, (host, port))
         self.add_resource('basic/', BasicResource())
 
-def main():
-    '''
-        Initial constructor.
 
-        :param verbose: enable/disable verbose option.
-        :type verbose: <bool>
-        :exceptions: None
-    '''
-    server = CoAPServer('0.0.0.0', 5683)
+if __name__ == '__main__':
+    server = CoAPServer('127.0.0.1', 5683)
     try:
         server.listen(10)
     except KeyboardInterrupt:
-        print 'Server Shutdown'
+        print('Server Shutdown')
         server.close()
-        print 'Exiting...'
-
-if __name__ == '__main__':
-    main()
+        print('Exiting...')
