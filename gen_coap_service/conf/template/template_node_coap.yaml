@@ -3,5 +3,5 @@ templates:
  - node_coap/server.template
 
 modules:
- - client.py
- - server.py
+ - client.js
+ - server.js
