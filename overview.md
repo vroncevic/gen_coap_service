@@ -13,7 +13,7 @@ Bitfields and mappings from strings to integers are used extensively to
 save space. Packets are simple to generate and can be parsed in place
 without consuming extra RAM in constrained devices.
 
-Based on message model, four message types are defined, and the message is
+Based on message model, four message types are Defines, and the message is
 the data communication carrier, and the data communication between devices
 is realized by exchanging network messages.
 
@@ -46,7 +46,7 @@ include a resource representation.
 Unlike HTTP, CoAP deals with these interchanges asynchronously over a
 datagram-oriented transport such as UDP. This is done logically using a layer
 of messages that supports optional reliability (with exponential back-off).
-CoAP defines four types of messages: Confirmable, Non-confirmable,
+CoAP Definess four types of messages: Confirmable, Non-confirmable,
 Acknowledgement, Reset. Method Codes and Response Codes included in some of
 these messages make them carry requests or responses. The basic exchanges of
 the four types of messages are somewhat orthogonal to the request/response
@@ -98,7 +98,7 @@ observation.
 
 ### Resource Discovery
 
-CoAP defines a standard mechanism for resource discovery. Servers provide a
+CoAP Definess a standard mechanism for resource discovery. Servers provide a
 list of their resources (along with metadata about them) at /.well-known/core.
 These links are in the application/link-format media type and allow a client
 to discover what resources are provided and what media types they are.
