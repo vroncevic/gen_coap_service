@@ -77,13 +77,20 @@ other information that should be provided before the modules are installed.</p>
 <p><a class="reference external" href="https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python3_build.yml"><img alt="gen_coap_service python3 build" src="https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python3_build.yml/badge.svg" /></a></p>
 <p>Navigate to release <a class="reference external" href="https://github.com/vroncevic/gen_coap_service/releases">page</a> download and extract release archive.</p>
 <p>To install this set of modules type the following</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xvzf<span class="w"> </span>gen_coap_service-x.y.z.tar.gz
-<span class="nb">cd</span><span class="w"> </span>gen_coap_service-x.y.z
-<span class="c1">#python3</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar<span class="w"> </span>xvzf<span class="w"> </span>gen-coap-service-x.y.z.tar.gz
+<span class="nb">cd</span><span class="w"> </span>gen-coap-service-x.y.z/
+<span class="c1"># python3</span>
+wget<span class="w"> </span>https://bootstrap.pypa.io/get-pip.py
+python3<span class="w"> </span>get-pip.py
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>setuptools
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+python3<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>build
 pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
-python3<span class="w"> </span>setup.py<span class="w"> </span>install_lib
-python3<span class="w"> </span>setup.py<span class="w"> </span>install_egg_info
-python3<span class="w"> </span>setup.py<span class="w"> </span>install_data
+python3<span class="w"> </span>-m<span class="w"> </span>build<span class="w"> </span>--no-isolation<span class="w"> </span>--wheel
+pip3<span class="w"> </span>install<span class="w"> </span>./dist/gen_coap_service-*-py3-none-any.whl
+rm<span class="w"> </span>-f<span class="w"> </span>get-pip.py
+chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_coap_service_run.py
+ln<span class="w"> </span>-s<span class="w"> </span>/usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_coap_service_run.py<span class="w"> </span>/usr/local/bin/gen_coap_service_run.py
 </pre></div>
 </div>
 <p>You can use Docker to create image/container, or You can use pip to install</p>
@@ -118,37 +125,37 @@ pip3<span class="w"> </span>install<span class="w"> </span>gen_coap_service
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>└──<span class="w"> </span>logging.template
 <span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>libcoap/
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>├──<span class="w"> </span>coap_client/
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>autogen.sh
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>autogen.template
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>build/
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>configure.ac
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>Makefile.am
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>README.md
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>editorconfig.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>configure.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>Makefile.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>├──<span class="w"> </span>README.template
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">   </span>└──<span class="w"> </span>src/
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>client_api.h
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>main.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>Makefile.am
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>Makefile.in
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_error.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_success.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_usage.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_verbose.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>process_options.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>time_handler.c
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>client_api.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>main.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>Makefile.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_error.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_success.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_usage.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>print_verbose.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>├──<span class="w"> </span>process_options.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>│<span class="w">       </span>└──<span class="w"> </span>time_handler.template
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>└──<span class="w"> </span>coap_server/
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>autogen.sh
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>autogen.template
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>build/
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>configure.ac
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>Makefile.am
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>README.md
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>│<span class="w">   </span>└──<span class="w"> </span>editorconfig.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>configure.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>Makefile.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>├──<span class="w"> </span>README.template
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">       </span>└──<span class="w"> </span>src/
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>get_date.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>get_full.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>get_time.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>main.c
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>Makefile.am
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>Makefile.in
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>server_api.h
-<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>└──<span class="w"> </span>time_handler.c
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>get_date.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>get_full.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>get_time.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>main.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>Makefile.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>├──<span class="w"> </span>server_api.template
+<span class="w">    </span>│<span class="w">       </span>│<span class="w">           </span>└──<span class="w"> </span>time_handler.template
 <span class="w">    </span>│<span class="w">       </span>├──<span class="w"> </span>node_coap/
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>├──<span class="w"> </span>client.template
 <span class="w">    </span>│<span class="w">       </span>│<span class="w">   </span>└──<span class="w"> </span>server.template

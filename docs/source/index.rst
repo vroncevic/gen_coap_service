@@ -49,13 +49,20 @@ To install this set of modules type the following
 
 .. code-block:: bash
 
-    tar xvzf gen_coap_service-x.y.z.tar.gz
-    cd gen_coap_service-x.y.z
-    #python3
+    tar xvzf gen-coap-service-x.y.z.tar.gz
+    cd gen-coap-service-x.y.z/
+    # python3
+    wget https://bootstrap.pypa.io/get-pip.py
+    python3 get-pip.py 
+    python3 -m pip install --upgrade setuptools
+    python3 -m pip install --upgrade pip
+    python3 -m pip install --upgrade build
     pip3 install -r requirements.txt
-    python3 setup.py install_lib
-    python3 setup.py install_egg_info
-    python3 setup.py install_data
+    python3 -m build --no-isolation --wheel
+    pip3 install ./dist/gen_coap_service-*-py3-none-any.whl
+    rm -f get-pip.py
+    chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_coap_service_run.py
+    ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_coap_service_run.py /usr/local/bin/gen_coap_service_run.py
 
 You can use Docker to create image/container, or You can use pip to install
 
@@ -95,37 +102,37 @@ Code structure
         │       │   └── logging.template
         │       ├── libcoap/
         │       │   ├── coap_client/
-        │       │   │   ├── autogen.sh
+        │       │   │   ├── autogen.template
         │       │   │   ├── build/
-        │       │   │   ├── configure.ac
-        │       │   │   ├── Makefile.am
-        │       │   │   ├── README.md
+        │       │   │   │   └── editorconfig.template
+        │       │   │   ├── configure.template
+        │       │   │   ├── Makefile.template
+        │       │   │   ├── README.template
         │       │   │   └── src/
-        │       │   │       ├── client_api.h
-        │       │   │       ├── main.c
-        │       │   │       ├── Makefile.am
-        │       │   │       ├── Makefile.in
-        │       │   │       ├── print_error.c
-        │       │   │       ├── print_success.c
-        │       │   │       ├── print_usage.c
-        │       │   │       ├── print_verbose.c
-        │       │   │       ├── process_options.c
-        │       │   │       └── time_handler.c
+        │       │   │       ├── client_api.template
+        │       │   │       ├── main.template
+        │       │   │       ├── Makefile.template
+        │       │   │       ├── print_error.template
+        │       │   │       ├── print_success.template
+        │       │   │       ├── print_usage.template
+        │       │   │       ├── print_verbose.template
+        │       │   │       ├── process_options.template
+        │       │   │       └── time_handler.template
         │       │   └── coap_server/
-        │       │       ├── autogen.sh
+        │       │       ├── autogen.template
         │       │       ├── build/
-        │       │       ├── configure.ac
-        │       │       ├── Makefile.am
-        │       │       ├── README.md
+        │       │       │   └── editorconfig.template
+        │       │       ├── configure.template
+        │       │       ├── Makefile.template
+        │       │       ├── README.template
         │       │       └── src/
-        │       │           ├── get_date.c
-        │       │           ├── get_full.c
-        │       │           ├── get_time.c
-        │       │           ├── main.c
-        │       │           ├── Makefile.am
-        │       │           ├── Makefile.in
-        │       │           ├── server_api.h
-        │       │           └── time_handler.c
+        │       │           ├── get_date.template
+        │       │           ├── get_full.template
+        │       │           ├── get_time.template
+        │       │           ├── main.template
+        │       │           ├── Makefile.template
+        │       │           ├── server_api.template
+        │       │           └── time_handler.template
         │       ├── node_coap/
         │       │   ├── client.template
         │       │   └── server.template
