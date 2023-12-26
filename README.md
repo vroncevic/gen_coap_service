@@ -106,66 +106,68 @@ Generator structure:
 
 ```bash
 gen_coap_service/
-    ├── conf/
-    │   ├── gen_coap_service.cfg
-    │   ├── gen_coap_service.logo
-    │   ├── gen_coap_service_utils.cfg
-    │   ├── project.yaml
-    │   └── template/
-    │       ├── coapthon/
-    │       │   ├── basic
-    │       │   ├── basic_resources.template
-    │       │   ├── coap_client.template
-    │       │   ├── coap_server.template
-    │       │   └── logging.template
-    │       ├── libcoap/
-    │       │   ├── coap_client/
-    │       │   │   ├── autogen.sh
-    │       │   │   ├── build/
-    │       │   │   ├── configure.ac
-    │       │   │   ├── Makefile.am
-    │       │   │   ├── README.md
-    │       │   │   └── src/
-    │       │   │       ├── client_api.h
-    │       │   │       ├── main.c
-    │       │   │       ├── Makefile.am
-    │       │   │       ├── print_error.c
-    │       │   │       ├── print_success.c
-    │       │   │       ├── print_usage.c
-    │       │   │       ├── print_verbose.c
-    │       │   │       ├── process_options.c
-    │       │   │       └── time_handler.c
-    │       │   └── coap_server/
-    │       │       ├── autogen.sh
-    │       │       ├── build/
-    │       │       ├── configure.ac
-    │       │       ├── Makefile.am
-    │       │       ├── README.md
-    │       │       └── src/
-    │       │           ├── get_date.c
-    │       │           ├── get_full.c
-    │       │           ├── get_time.c
-    │       │           ├── main.c
-    │       │           ├── Makefile.am
-    │       │           ├── server_api.h
-    │       │           └── time_handler.c
-    │       ├── node_coap/
-    │       │   ├── client.template
-    │       │   └── server.template
-    │       ├── template_coapthon.yaml
-    │       ├── template_libcoap.yaml
-    │       └── template_node_coap.yaml
-    ├── __init__.py
-    ├── log/
-    │   └── gen_coap_service.log
-    ├── pro/
-    │   ├── __init__.py
-    │   ├── read_template.py
-    │   └── write_template.py
-    └── run/
-        └── gen_coap_service_run.py
-    
-    16 directories, 43 files
+        ├── conf/
+        │   ├── gen_coap_service.cfg
+        │   ├── gen_coap_service.logo
+        │   ├── gen_coap_service_utils.cfg
+        │   ├── project.yaml
+        │   └── template/
+        │       ├── coapthon/
+        │       │   ├── basic
+        │       │   ├── basic_resources.template
+        │       │   ├── coap_client.template
+        │       │   ├── coap_server.template
+        │       │   └── logging.template
+        │       ├── libcoap/
+        │       │   ├── coap_client/
+        │       │   │   ├── autogen.template
+        │       │   │   ├── build/
+        │       │   │   │   └── editorconfig.template
+        │       │   │   ├── configure.template
+        │       │   │   ├── Makefile.template
+        │       │   │   ├── README.template
+        │       │   │   └── src/
+        │       │   │       ├── client_api.template
+        │       │   │       ├── main.template
+        │       │   │       ├── Makefile.template
+        │       │   │       ├── print_error.template
+        │       │   │       ├── print_success.template
+        │       │   │       ├── print_usage.template
+        │       │   │       ├── print_verbose.template
+        │       │   │       ├── process_options.template
+        │       │   │       └── time_handler.template
+        │       │   └── coap_server/
+        │       │       ├── autogen.template
+        │       │       ├── build/
+        │       │       │   └── editorconfig.template
+        │       │       ├── configure.template
+        │       │       ├── Makefile.template
+        │       │       ├── README.template
+        │       │       └── src/
+        │       │           ├── get_date.template
+        │       │           ├── get_full.template
+        │       │           ├── get_time.template
+        │       │           ├── main.template
+        │       │           ├── Makefile.template
+        │       │           ├── server_api.template
+        │       │           └── time_handler.template
+        │       ├── node_coap/
+        │       │   ├── client.template
+        │       │   └── server.template
+        │       ├── template_coapthon.yaml
+        │       ├── template_libcoap.yaml
+        │       └── template_node_coap.yaml
+        ├── __init__.py
+        ├── log/
+        │   └── gen_coap_service.log
+        ├── pro/
+        │   ├── __init__.py
+        │   ├── read_template.py
+        │   └── write_template.py
+        └── run/
+            └── gen_coap_service_run.py
+        
+        16 directories, 45 files
 ```
 
 ### Docs

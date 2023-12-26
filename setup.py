@@ -5,7 +5,7 @@
 Module
     setup.py
 Copyright
-    Copyright (C) 2020 Vladimir Roncevic <elektron.ronca@gmail.com>
+    Copyright (C) 2020 - 2024 Vladimir Roncevic <elektron.ronca@gmail.com>
     gen_coap_service is free software: you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published
     by the Free Software Foundation, either version 3 of the License, or
@@ -29,7 +29,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_coap_service'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.0'
+__version__ = '1.1.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -61,12 +61,12 @@ APPROVED_LICENSES: List[str] = [
 PYP_CLASSIFIERS: List[str] = SUPPORTED_PY_VERSIONS + APPROVED_LICENSES
 setup(
     name='gen_coap_service',
-    version='1.1.0',
+    version='1.1.2',
     description='Generating CoAP Modules',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
     url='https://vroncevic.github.io/gen_coap_service',
-    license='GPL 2024 Free software to use and distributed it.',
+    license='GPL 2020 - 2024 Free software to use and distributed it.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     keywords='Unix, Linux, Development, CoAP, Modules',
@@ -76,10 +76,45 @@ setup(
     install_requires=['ats-utilities'],
     package_data={
         'gen_coap_service': [
+            f'{CONF}/gen_coap_service.logo',
             f'{CONF}/gen_coap_service.cfg',
             f'{CONF}/gen_coap_service_util.cfg',
             f'{CONF}/project.yaml',
-            f'{CONF}/template/posix/np.template',
+            f'{TEMPLATE}/template_coapthon.yaml',
+            f'{TEMPLATE}/template_libcoap.yaml',
+            f'{TEMPLATE}/template_node_coap.yaml',
+            f'{TEMPLATE}/coapthon/basic_resources.template',
+            f'{TEMPLATE}/coapthon/coap_client.template',
+            f'{TEMPLATE}/coapthon/coap_server.template',
+            f'{TEMPLATE}/coapthon/logging.template',
+            f'{TEMPLATE}/libcoap/coap_client/build/editorconfig.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/client_api.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/main.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/Makefile.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/print_error.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/print_success.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/print_usage.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/print_verbose.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/process_options.template',
+            f'{TEMPLATE}/libcoap/coap_client/src/time_handler.template',
+            f'{TEMPLATE}/libcoap/coap_client/autogen.template',
+            f'{TEMPLATE}/libcoap/coap_client/configure.template',
+            f'{TEMPLATE}/libcoap/coap_client/Makefile.template',
+            f'{TEMPLATE}/libcoap/coap_client/README.template',
+            f'{TEMPLATE}/libcoap/coap_server/build/editorconfig.template',
+            f'{TEMPLATE}/libcoap/coap_server/src/get_date.template',
+            f'{TEMPLATE}/libcoap/coap_server/src/get_full.template',
+            f'{TEMPLATE}/libcoap/coap_server/src/get_time.template',
+            f'{TEMPLATE}/libcoap/coap_server/src/main.template',
+            f'{TEMPLATE}/libcoap/coap_server/src/Makefile.template',
+            f'{TEMPLATE}/libcoap/coap_server/src/server_api.template',
+            f'{TEMPLATE}/libcoap/coap_server/src/time_handler.template',
+            f'{TEMPLATE}/libcoap/coap_server/autogen.template',
+            f'{TEMPLATE}/libcoap/coap_server/configure.template',
+            f'{TEMPLATE}/libcoap/coap_server/Makefile.template',
+            f'{TEMPLATE}/libcoap/coap_server/README.template',
+            f'{TEMPLATE}/node_coap/client.template',
+            f'{TEMPLATE}/node_coap/server.template',
             f'{LOG}/gen_coap_service.log'
         ]
     },
