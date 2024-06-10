@@ -1,20 +1,16 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>gen_coap_service.pro &#8212; gen_coap_service https://github.com/vroncevic/gen_coap_service/releases documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css?v=514cf933" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/documentation_options.js?v=4e290b8e"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
@@ -86,13 +82,15 @@
 <span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2024, https://vroncevic.github.io/gen_coap_service&#39;</span>
 <span class="n">__credits__</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
 <span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE&#39;</span>
-<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.1.2&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.1.3&#39;</span>
 <span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
 <span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
 <span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
 
 
-<div class="viewcode-block" id="GenCoAP"><a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP">[docs]</a><span class="k">class</span> <span class="nc">GenCoAP</span><span class="p">(</span><span class="n">FileCheck</span><span class="p">,</span> <span class="n">ProConfig</span><span class="p">,</span> <span class="n">ProName</span><span class="p">):</span>
+<div class="viewcode-block" id="GenCoAP">
+<a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP">[docs]</a>
+<span class="k">class</span> <span class="nc">GenCoAP</span><span class="p">(</span><span class="n">FileCheck</span><span class="p">,</span> <span class="n">ProConfig</span><span class="p">,</span> <span class="n">ProName</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Defines class GenCoAP with attribute(s) and method(s).</span>
 <span class="sd">        Generates project_structure by template and parameters.</span>
@@ -139,7 +137,9 @@
             <span class="n">yml2obj</span> <span class="o">=</span> <span class="n">Yaml2Object</span><span class="p">(</span><span class="n">pro_structure</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">yml2obj</span><span class="o">.</span><span class="n">read_configuration</span><span class="p">()</span>
 
-<div class="viewcode-block" id="GenCoAP.get_reader"><a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP.get_reader">[docs]</a>    <span class="k">def</span> <span class="nf">get_reader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReadTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<div class="viewcode-block" id="GenCoAP.get_reader">
+<a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP.get_reader">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_reader</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReadTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Gets template reader.</span>
 
@@ -149,7 +149,10 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_reader</span></div>
 
-<div class="viewcode-block" id="GenCoAP.get_writer"><a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP.get_writer">[docs]</a>    <span class="k">def</span> <span class="nf">get_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+
+<div class="viewcode-block" id="GenCoAP.get_writer">
+<a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP.get_writer">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_writer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WriteTemplate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">            Gets template writer.</span>
 
@@ -159,7 +162,10 @@
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_writer</span></div>
 
-<div class="viewcode-block" id="GenCoAP.project_setup"><a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP.project_setup">[docs]</a>    <span class="k">def</span> <span class="nf">project_setup</span><span class="p">(</span>
+
+<div class="viewcode-block" id="GenCoAP.project_setup">
+<a class="viewcode-back" href="../../gen_coap_service.pro.html#gen_coap_service.pro.GenCoAP.project_setup">[docs]</a>
+    <span class="k">def</span> <span class="nf">project_setup</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">pro_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">pro_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
@@ -189,8 +195,11 @@
             <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s1">&#39;missing project name&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="n">pro_type</span><span class="p">):</span>
             <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s1">&#39;missing project type&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">pro_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s1">&#39;not supported project type&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s1">&#39;missing project configuration&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pro_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]:</span>
+                <span class="k">raise</span> <span class="n">ATSValueError</span><span class="p">(</span><span class="s1">&#39;not supported project type&#39;</span><span class="p">)</span>
         <span class="n">verbose_message</span><span class="p">(</span>
             <span class="n">verbose</span><span class="p">,</span> <span class="p">[</span>
                 <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_GEN_VERBOSE</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="si">}</span><span class="s1"> generate&#39;</span><span class="p">,</span>
@@ -203,10 +212,10 @@
             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">template_dir</span><span class="si">}</span><span class="s1">template_</span><span class="si">{</span><span class="n">pro_type</span><span class="si">}</span><span class="s1">.yaml&#39;</span><span class="p">,</span> <span class="n">verbose</span>
         <span class="p">)</span>
         <span class="n">all_stat</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">yml2obj</span><span class="p">):</span>
+        <span class="n">templates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">yml2obj</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_reader</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="p">):</span>
             <span class="n">pro_cfg</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="n">yml2obj</span><span class="o">.</span><span class="n">read_configuration</span><span class="p">()</span>
             <span class="n">pro_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">templates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">modules</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">if</span> <span class="nb">bool</span><span class="p">(</span><span class="n">pro_cfg</span><span class="p">):</span>
                 <span class="n">templates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pro_cfg</span><span class="p">[</span><span class="s1">&#39;templates&#39;</span><span class="p">]</span>
@@ -214,7 +223,7 @@
                 <span class="n">pro_data</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pro_name</span>
                 <span class="n">pro_data</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pro_type</span>
                 <span class="k">if</span> <span class="n">pro_type</span> <span class="o">==</span> <span class="s1">&#39;libcoap&#39;</span><span class="p">:</span>
-                    <span class="n">directories</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">directories</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
                         <span class="s1">&#39;coap_client&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;coap_server&#39;</span><span class="p">,</span>
                         <span class="s1">&#39;coap_client/build&#39;</span><span class="p">,</span>
@@ -233,7 +242,9 @@
                     <span class="n">all_stat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pro_data</span><span class="p">,</span> <span class="n">verbose</span><span class="p">))</span>
         <span class="k">return</span> <span class="nb">all</span><span class="p">([</span>
             <span class="nb">bool</span><span class="p">(</span><span class="n">all_stat</span><span class="p">),</span> <span class="nb">all</span><span class="p">(</span><span class="n">all_stat</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">templates</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_stat</span><span class="p">)</span>
-        <span class="p">])</span></div></div>
+        <span class="p">])</span></div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -272,8 +283,8 @@
       </ul>
     </div>
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    &#169; Copyright 2024, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
     </div>
   </body>
 </html>

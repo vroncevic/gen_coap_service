@@ -1,6 +1,6 @@
-<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/gen_coap_service_logo.png" width="25%">
-
 # Generates CoAP modules
+
+<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/gen_coap_service_logo.png" width="25%">
 
 **gen_coap_service** is tool for generation of CoAP modules.
 
@@ -47,7 +47,8 @@ Currently there are three ways to install package
 Python package is located at **[pypi.org](https://pypi.org/project/gen-coap-service/)**.
 
 You can install by using pip
-```
+
+```bash
 # python3
 pip3 install gen-coap-service
 ```
@@ -77,8 +78,9 @@ rm -f get-pip.py
 
 Navigate to release **[page](https://github.com/vroncevic/gen_coap_service/releases/)** download and extract release archive.
 
-To install modules, locate and run setup.py with arguments
-```
+To install **gen-coap-service** locate and run setup.py with arguments
+
+```bash
 tar xvzf gen_coap_service-x.y.z.tar.gz
 cd gen_coap_service-x.y.z/
 # python3
@@ -102,7 +104,7 @@ You can use docker to create image/container.
 
 **gen_coap_service** is based on OOP.
 
-Generator structure:
+Generator structure
 
 ```bash
 gen_coap_service/

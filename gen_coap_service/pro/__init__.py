@@ -43,7 +43,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_coap_service'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -146,8 +146,11 @@ class GenCoAP(FileCheck, ProConfig, ProName):
             raise ATSValueError('missing project name')
         if not bool(pro_type):
             raise ATSValueError('missing project type')
-        if pro_type not in self.config['types']:
-            raise ATSValueError('not supported project type')
+        if not bool(self.config):
+            raise ATSValueError('missing project configuration')
+        else:
+            if pro_type not in self.config['types']:
+                raise ATSValueError('not supported project type')
         verbose_message(
             verbose, [
                 f'{self._GEN_VERBOSE.lower()} generate',
@@ -160,10 +163,10 @@ class GenCoAP(FileCheck, ProConfig, ProName):
             f'{template_dir}template_{pro_type}.yaml', verbose
         )
         all_stat: List[bool] = []
-        if bool(yml2obj):
+        templates: List[str] = []
+        if bool(yml2obj) and bool(self._reader) and bool(self._writer):
             pro_cfg: Dict[Any, Any] = yml2obj.read_configuration()
             pro_data: Dict[Any, Any] = {}
-            templates: List[str] = []
             modules: List[str] = []
             if bool(pro_cfg):
                 templates: List[str] = pro_cfg['templates']
@@ -171,7 +174,7 @@ class GenCoAP(FileCheck, ProConfig, ProName):
                 pro_data['name'] = pro_name
                 pro_data['type'] = pro_type
                 if pro_type == 'libcoap':
-                    directories = [
+                    directories: List[str] = [
                         'coap_client',
                         'coap_server',
                         'coap_client/build',

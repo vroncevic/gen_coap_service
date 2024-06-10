@@ -38,7 +38,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_coap_service'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -48,14 +48,7 @@ class GenCoAPServiceTestCase(TestCase):
     '''
         Defines class GenCoAPServiceTestCase with attribute(s) and method(s).
         Creates test cases for checking functionalities of GenCoAPService.
-        GenCoAPService uni        if exists('basic_resources.py'):
-            remove('basic_resources.py')
-        if exists('coap_client.py'):
-            remove('coap_client.py')
-        if exists('coap_server.py'):
-            remove('coap_server.py')
-        if exists('logging.conf'):
-            remove('logging.conf')t tests.
+        GenCoAPService unit tests.
 
         It defines:
 
@@ -96,80 +89,66 @@ class GenCoAPServiceTestCase(TestCase):
     def test_missing_args(self) -> None:
         '''Test missing args'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_coap_service_run.py')
         generator: GenCoAPService = GenCoAPService()
         self.assertFalse(generator.process())
 
     def test_wrong_arg_name(self) -> None:
         '''Test wrong arg name'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_coap_service_run.py')
-        sys.argv.insert(2, '-t')
-        sys.argv.insert(3, 'coapthon')
-        sys.argv.insert(4, '-d')
-        sys.argv.insert(5, 'simple_project')
+        sys.argv.insert(0, '-t')
+        sys.argv.insert(1, 'coapthon')
+        sys.argv.insert(2, '-d')
+        sys.argv.insert(3, 'simple_project')
         generator: GenCoAPService = GenCoAPService()
         self.assertFalse(generator.process())
 
     def test_wrong_arg_type(self) -> None:
         '''Test wrong arg type'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_coap_service_run.py')
-        sys.argv.insert(2, '-d')
-        sys.argv.insert(3, 'coapthon')
-        sys.argv.insert(4, '-g')
-        sys.argv.insert(5, 'simple_project')
+        sys.argv.insert(0, '-d')
+        sys.argv.insert(1, 'coapthon')
+        sys.argv.insert(2, '-n')
+        sys.argv.insert(3, 'simple_project')
         generator: GenCoAPService = GenCoAPService()
         self.assertFalse(generator.process())
 
     def test_process(self) -> None:
         '''Generate project structure'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_coap_service_run.py')
-        sys.argv.insert(2, '-t')
-        sys.argv.insert(3, 'coapthon')
-        sys.argv.insert(4, '-g')
-        sys.argv.insert(5, 'simple_project')
+        sys.argv.insert(0, '-t')
+        sys.argv.insert(1, 'coapthon')
+        sys.argv.insert(2, '-n')
+        sys.argv.insert(3, 'simple_project')
         generator: GenCoAPService = GenCoAPService()
         self.assertTrue(generator.process())
 
     def test_gen_coaplib(self) -> None:
         '''Generate libcoap structure'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_coap_service_run.py')
-        sys.argv.insert(2, '-t')
-        sys.argv.insert(3, 'libcoap')
-        sys.argv.insert(4, '-g')
-        sys.argv.insert(5, 'simple_project')
+        sys.argv.insert(0, '-t')
+        sys.argv.insert(1, 'libcoap')
+        sys.argv.insert(2, '-n')
+        sys.argv.insert(3, 'simple_project')
         generator: GenCoAPService = GenCoAPService()
         self.assertTrue(generator.process())
 
     def test_gen_node_coap(self) -> None:
         '''Generate node_coap structure'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_coap_service_run.py')
-        sys.argv.insert(2, '-t')
-        sys.argv.insert(3, 'node_coap')
-        sys.argv.insert(4, '-g')
-        sys.argv.insert(5, 'simple_project')
+        sys.argv.insert(0, '-t')
+        sys.argv.insert(1, 'node_coap')
+        sys.argv.insert(2, '-n')
+        sys.argv.insert(3, 'simple_project')
         generator: GenCoAPService = GenCoAPService()
         self.assertTrue(generator.process())
 
     def test_tool_not_operational(self) -> None:
         '''Test not operational'''
         sys.argv.clear()
-        sys.argv.insert(0, 'python3')
-        sys.argv.insert(1, 'gen_coap_service_run.py')
-        sys.argv.insert(2, '-t')
-        sys.argv.insert(3, 'coapthon')
-        sys.argv.insert(4, '-g')
-        sys.argv.insert(5, 'simple_project')
+        sys.argv.insert(0, '-t')
+        sys.argv.insert(1, 'coapthon')
+        sys.argv.insert(2, '-n')
+        sys.argv.insert(3, 'simple_project')
         generator: GenCoAPService = GenCoAPService()
         generator.tool_operational = False
         self.assertFalse(generator.process())
