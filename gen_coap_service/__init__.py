@@ -17,12 +17,13 @@ Copyright
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
     Defines class GenCoAPService with attribute(s) and method(s).
-    Loads a base info, creates an CLI interface and runs operations.
+    Loads a base info, creates a CLI interface and runs operations.
 '''
 
 import sys
 from typing import Any, List
 from os.path import exists, dirname, realpath
+from os import getcwd
 from argparse import Namespace
 
 try:
@@ -43,7 +44,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_coap_service'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.2'
+__version__ = '1.1.3'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -52,7 +53,7 @@ __status__ = 'Updated'
 class GenCoAPService(CfgCLI):
     '''
         Defines class GenCoAPService with attribute(s) and method(s).
-        Loads a base info, creates an CLI interface and runs operations.
+        Loads a base info, creates a CLI interface and runs operations.
 
         It Definess:
 
@@ -71,7 +72,7 @@ class GenCoAPService(CfgCLI):
     _CONFIG: str = '/conf/gen_coap_service.cfg'
     _LOG: str = '/log/gen_coap_service.log'
     _LOGO: str = '/conf/gen_coap_service.logo'
-    _OPS: str = ['-g', '--gen', '-t', '--type', '-v', '--verbose', '--version']
+    _OPS: List[str] = ['-n', '--name', '-t', '--type', '-v', '--verbose']
 
     def __init__(self, verbose: bool = False) -> None:
         '''
@@ -100,7 +101,7 @@ class GenCoAPService(CfgCLI):
         )
         if self.tool_operational:
             self.add_new_option(
-                self._OPS[0], self._OPS[1], dest='gen',
+                self._OPS[0], self._OPS[1], dest='name',
                 help='generate project (provide name)'
             )
             self.add_new_option(
@@ -111,9 +112,6 @@ class GenCoAPService(CfgCLI):
                 self._OPS[4], self._OPS[5],
                 action='store_true', default=False,
                 help='activate verbose mode for generation'
-            )
-            self.add_new_option(
-                self._OPS[6], action='version', version=__version__
             )
 
     def process(self, verbose: bool = False) -> bool:
@@ -126,102 +124,59 @@ class GenCoAPService(CfgCLI):
             :rtype: <bool>
             :exceptions: None
         '''
-        status = False
+        status: bool = False
         if self.tool_operational:
-            if len(sys.argv) >= 6:
-                if sys.argv[2] not in self._OPS:
+            try:
+                args: Any | Namespace = self.parse_args(sys.argv)
+                if not bool(getattr(args, "name")):
                     error_message(
-                        [
-                            f'{self._GEN_VERBOSE.lower()}',
-                            'provide name (-g app | --gen app)'
-                        ]
-                    )
-                    self._logger.write_log(
-                        'missing project name', self._logger.ATS_ERROR
+                        [f'{self._GEN_VERBOSE.lower()} missing name argument']
                     )
                     return status
-                if sys.argv[4] not in self._OPS:
+                if not bool(getattr(args, "type")):
                     error_message(
-                        [
-                            f'{self._GEN_VERBOSE.lower()}',
-                            'provide type (-t libcoap | --type libcoap)',
-                            'types: coapthon | libcoap | node_coap'
-                        ]
-                    )
-                    self._logger.write_log(
-                        'missing project type', self._logger.ATS_ERROR
+                        [f'{self._GEN_VERBOSE.lower()} missing type argument']
                     )
                     return status
-            else:
-                error_message(
-                    [f'{self._GEN_VERBOSE.lower()} provide project name/type']
+                if exists(f'{getcwd()}/{str(getattr(args, "name"))}'):
+                    error_message([
+                        f'{self._GEN_VERBOSE.lower()}',
+                        f'project with name [{getattr(args, "name")}] exists'
+                    ])
+                    return status
+                gen: GenCoAP = GenCoAP(getattr(args, 'verbose') or verbose)
+                print(
+                    " ".join([
+                        f'[{self._GEN_VERBOSE.lower()}]',
+                        'generate CoAP project skeleton',
+                        str(getattr(args, "type")),
+                        str(getattr(args, "name"))
+                    ])
                 )
-                self._logger.write_log(
-                    'provide project name/type', self._logger.ATS_ERROR
+                try:
+                    status = gen.project_setup(
+                        getattr(args, "name"), getattr(args, "type"),
+                        getattr(args, "verbose") or verbose
+                    )
+                except (ATSTypeError, ATSValueError) as e:
+                    error_message([f'{self._GEN_VERBOSE.lower()} {str(e)}'])
+                    self._logger.write_log(f'{str(e)}', self._logger.ATS_ERROR)
+                if status:
+                    success_message([f'{self._GEN_VERBOSE.lower()} done\n'])
+                    self._logger.write_log(
+                        f'generation {getattr(args, "name")} done',
+                        self._logger.ATS_INFO
+                    )
+                else:
+                    error_message([f'{self._GEN_VERBOSE.lower()} failed'])
+                    self._logger.write_log(
+                        'generation failed', self._logger.ATS_ERROR
+                    )
+            except SystemExit:
+                error_message(
+                    [f'{self._GEN_VERBOSE.lower()} expected argument -n']
                 )
                 return status
-            args: Any | Namespace = self.parse_args(sys.argv[2:])
-            if not exists(getattr(args, 'gen')):
-                if bool(getattr(args, 'gen')) and bool(getattr(args, 'type')):
-                    generator: GenCoAP = GenCoAP(
-                        getattr(args, 'verbose') or verbose
-                    )
-                    print(
-                        " ".join([
-                            f'[{self._GEN_VERBOSE.lower()}]',
-                            'gen CoAP project skeleton',
-                            str(getattr(args, 'type')),
-                            str(getattr(args, 'gen'))
-                        ])
-                    )
-                    try:
-                        status = generator.project_setup(
-                            getattr(args, 'gen'), getattr(args, 'type'),
-                            getattr(args, 'verbose') or verbose
-                        )
-                    except (ATSTypeError, ATSValueError) as e:
-                        error_message(
-                            [f'{self._GEN_VERBOSE.lower()} {str(e)}']
-                        )
-                        self._logger.write_log(
-                            f'{str(e)}', self._logger.ATS_ERROR
-                        )
-                    if status:
-                        success_message(
-                            [f'{self._GEN_VERBOSE.lower()} done\n']
-                        )
-                        self._logger.write_log(
-                            f'gen project {getattr(args, "gen")} done',
-                            self._logger.ATS_INFO
-                        )
-                    else:
-                        error_message(
-                            [f'{self._GEN_VERBOSE.lower()} generation failed']
-                        )
-                        self._logger.write_log(
-                            'generation failed', self._logger.ATS_ERROR
-                        )
-                else:
-                    error_message(
-                        [
-                            f'{self._GEN_VERBOSE.lower()}',
-                            'provide project name/type'
-                        ]
-                    )
-                    self._logger.write_log(
-                        'missing project name/type', self._logger.ATS_ERROR
-                    )
-            else:
-                error_message(
-                    [
-                        f'{self._GEN_VERBOSE.lower()}',
-                        f'project with name [{getattr(args, "gen")}] exists'
-                    ]
-                )
-                self._logger.write_log(
-                    f'project with name [{getattr(args, "gen")}] exists',
-                    self._logger.ATS_ERROR
-                )
         else:
             error_message(
                 [f'{self._GEN_VERBOSE.lower()} tool is not operational']
