@@ -21,7 +21,7 @@ Info
 '''
 
 import sys
-from typing import List
+from typing import List, Optional
 
 try:
     from ats_utilities.config_io.file_check import FileCheck
@@ -36,7 +36,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_coap_service'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -70,21 +70,21 @@ class ReadTemplate(FileCheck):
         verbose_message(verbose, [f'{self._GEN_VERBOSE.lower()} init reader'])
 
     def read(
-        self, template: str | None, verbose: bool = False
-    ) -> str | None:
+        self, template: Optional[str], verbose: bool = False
+    ) -> Optional[str]:
         '''
             Reads a template.
 
             :param template: Template file name | None
-            :type template: <str> | <NoneType>
+            :type template: <Optional[str]>
             :param verbose: Enable/disable verbose option
             :type verbose: <bool>
             :return: Template content | None
-            :rtype: <str> | <NoneType>
+            :rtype: <Optional[str]>
             :exceptions: ATSTypeError | ATSValueError
         '''
-        error_msg: str | None = None
-        error_id: int | None = None
+        error_msg: Optional[str] = None
+        error_id: Optional[int] = None
         error_msg, error_id = self.check_params([('str:template', template)])
         if error_id == self.TYPE_ERROR:
             raise ATSTypeError(error_msg)
@@ -93,7 +93,7 @@ class ReadTemplate(FileCheck):
         self.check_path(template, verbose)
         self.check_mode('r', verbose)
         self.check_format(template, 'template', verbose)
-        template_content: str | None = None
+        template_content: Optional[str] = None
         if self.is_file_ok():
             with open(template, 'r', encoding='utf-8') as file_template:
                 template_content = file_template.read()
