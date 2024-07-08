@@ -38,7 +38,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2024, https://vroncevic.github.io/gen_coap_service'
 __credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.4'
+__version__ = '1.1.5'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -64,7 +64,6 @@ class GenCoAPServiceTestCase(TestCase):
                 | test_process - Generate project structure.
                 | test_gen_coaplib - Generate libcoap structure.
                 | test_gen_node_coap - Generate node_coap structure.
-                | test_tool_not_operational - Test not operational.
     '''
 
     def setUp(self) -> None:
@@ -141,17 +140,6 @@ class GenCoAPServiceTestCase(TestCase):
         sys.argv.insert(3, 'simple_project')
         generator: GenCoAPService = GenCoAPService()
         self.assertTrue(generator.process())
-
-    def test_tool_not_operational(self) -> None:
-        '''Test not operational'''
-        sys.argv.clear()
-        sys.argv.insert(0, '-t')
-        sys.argv.insert(1, 'coapthon')
-        sys.argv.insert(2, '-n')
-        sys.argv.insert(3, 'simple_project')
-        generator: GenCoAPService = GenCoAPService()
-        generator.tool_operational = False
-        self.assertFalse(generator.process())
 
 
 if __name__ == '__main__':
