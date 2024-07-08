@@ -173,6 +173,16 @@ Generator structure
     16 directories, 46 files
 ```
 
+### Code coverage
+
+| Name | Stmts | Miss | Cover |
+|------|-------|------|-------|
+| `gen_coap_service/__init__.py` | 75 | 14 | 81% |
+| `gen_coap_service/pro/__init__.py` | 85 | 3 | 96% |
+| `gen_coap_service/pro/read_template.py` | 38 | 2 | 95% |
+| `gen_coap_service/pro/write_template.py` | 40 | 2 | 95% |
+| **Total** | 238 | 21 | 91% |
+
 ### Docs
 
 [![Documentation Status](https://readthedocs.org/projects/gen_coap_service/badge/?version=latest)](https://gen-coap-service.readthedocs.io/projects/gen_coap_service/en/latest/?badge=latest)
