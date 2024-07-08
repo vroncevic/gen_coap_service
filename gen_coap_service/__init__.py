@@ -138,7 +138,7 @@ class GenCoAPService(ATSCli):
                         [f'{self._GEN_VERBOSE.lower()} missing type argument']
                     )
                     return status
-                if exists(f'{getcwd()}/{str(getattr(args, 'name'))}'):
+                if exists(f'{getcwd()}/{str(getattr(args, "name"))}'):
                     error_message([
                         f'{self._GEN_VERBOSE.lower()}',
                         f'project with name [{getattr(args, "name")}] exists'
