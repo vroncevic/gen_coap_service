@@ -24,9 +24,9 @@ import sys
 
 try:
     from coapthon.client.helperclient import HelperClient
-except ImportError as ats_error_message:
-    # Force close python ATS ##################################################
-    sys.exit(f'\n{__file__}\n{ats_error_message}\n')
+except ImportError as ats_error_message:  # pragma: no cover
+    # Force exit python #######################################################
+    sys.exit(f'\n{__file__}\n{ats_error_message}\n')  # pragma: no cover
 
 if __name__ == '__main__':
     client = HelperClient(server=('127.0.0.1', 5683))

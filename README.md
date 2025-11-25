@@ -23,6 +23,7 @@ other information that should be provided before the modules are installed.
     - [Install using docker](#install-using-docker)
 - [Dependencies](#dependencies)
 - [Tool structure](#tool-structure)
+- [Code coverage](#code-coverage)
 - [Docs](#docs)
 - [Copyright and Licence](#copyright-and-licence)
 
@@ -177,11 +178,11 @@ Generator structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `gen_coap_service/__init__.py` | 75 | 14 | 81% |
-| `gen_coap_service/pro/__init__.py` | 85 | 3 | 96% |
-| `gen_coap_service/pro/read_template.py` | 38 | 2 | 95% |
-| `gen_coap_service/pro/write_template.py` | 40 | 2 | 95% |
-| **Total** | 238 | 21 | 91% |
+| `gen_coap_service/__init__.py` | 73 | 12 | 84%|
+| `gen_coap_service/pro/__init__.py` | 83 | 1 | 99%|
+| `gen_coap_service/pro/read_template.py` | 36 | 0 | 100%|
+| `gen_coap_service/pro/write_template.py` | 38 | 0 | 100%|
+| **Total** | 230 | 13 | 94% |
 
 ### Docs
 
@@ -196,7 +197,7 @@ More documentation and info at:
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-Copyright (C) 2020 - 2024 by [vroncevic.github.io/gen_coap_service](https://vroncevic.github.io/gen_coap_service)
+Copyright (C) 2020 - 2026 by [vroncevic.github.io/gen_coap_service](https://vroncevic.github.io/gen_coap_service)
 
 **gen_coap_service** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,
