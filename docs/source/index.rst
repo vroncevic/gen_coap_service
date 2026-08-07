@@ -1,13 +1,13 @@
-Generates CoAP modules
------------------------
+Create CoAP service project skeleton
+---------------------------------------
 
-**gen_coap_service** is tool for generation of CoAP modules.
+**gen_coap_service** is tool for creating CoAP service project skeleton.
 
 Developed in `python <https://www.python.org/>`_ code.
 
-The README is used to introduce the modules and provide instructions on
-how to install the modules, any machine dependencies it may have and any
-other information that should be provided before the modules are installed.
+The README is used to introduce the tool and provide instructions on
+how to install the tool, any machine dependencies it may have and any
+other information that should be provided before the tool is installed.
 
 |gen_coap_service python checker| |gen_coap_service python package| |github issues| |documentation status| |github contributors|
 
@@ -23,8 +23,8 @@ other information that should be provided before the modules are installed.
 .. |github contributors| image:: https://img.shields.io/github/contributors/vroncevic/gen_coap_service.svg
    :target: https://github.com/vroncevic/gen_coap_service/graphs/contributors
 
-.. |documentation status| image:: https://readthedocs.org/projects/gen-coap-service/badge/?version=latest
-   :target: https://gen-coap-service.readthedocs.io/en/latest/?badge=latest
+.. |documentation status| image:: https://readthedocs.org/projects/gen-coap_service/badge/?version=latest
+   :target: https://gen-coap_service.readthedocs.io/en/latest/?badge=latest
 
 .. toctree::
    :maxdepth: 4
@@ -33,8 +33,8 @@ other information that should be provided before the modules are installed.
    self
    modules
 
-Installation
--------------
+🚀 Installation
+---------------
 
 |gen_coap_service python3 build|
 
@@ -45,12 +45,12 @@ Navigate to release `page`_ download and extract release archive.
 
 .. _page: https://github.com/vroncevic/gen_coap_service/releases
 
-To install this set of modules type the following
+To install **gen_coap_service** type the following
 
 .. code-block:: bash
 
-    tar xvzf gen-coap-service-x.y.z.tar.gz
-    cd gen-coap-service-x.y.z/
+    tar xvzf gen_coap_service-x.y.z.tar.gz
+    cd gen_coap_service-x.y.z/
     # python3
     wget https://bootstrap.pypa.io/get-pip.py
     python3 get-pip.py 
@@ -61,129 +61,150 @@ To install this set of modules type the following
     python3 -m build --no-isolation --wheel
     pip3 install ./dist/gen_coap_service-*-py3-none-any.whl
     rm -f get-pip.py
-    chmod 755 /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_coap_service_run.py
-    ln -s /usr/local/lib/python3.10/dist-packages/usr/local/bin/gen_coap_service_run.py /usr/local/bin/gen_coap_service_run.py
 
 You can use Docker to create image/container, or You can use pip to install
 
 .. code-block:: bash
 
-    #python3
+    # python3
     pip3 install gen_coap_service
 
-Dependencies
--------------
+📦 Dependencies
+---------------
 
 **gen_coap_service** requires next modules and libraries
 
 * `ats-utilities - Python App/Tool/Script Utilities <https://pypi.org/project/ats-utilities/>`_
 
+📁 Tool structure
+-----------------
+
+**gen_coap_service** is based on OOP.
+
 Tool structure
-------------------
-
-**gen_coap_service** is based on OOP
-
-Code structure
 
 .. code-block:: bash
 
     gen_coap_service/
-           ├── conf/
-           │   ├── gen_coap_service.cfg
-           │   ├── gen_coap_service.logo
-           │   ├── gen_coap_service_utils.cfg
-           │   ├── project.yaml
-           │   └── template/
-           │       ├── coapthon/
-           │       │   ├── basic/
-           │       │   ├── basic_resources.template
-           │       │   ├── coap_client.template
-           │       │   ├── coap_server.template
-           │       │   └── logging.template
-           │       ├── libcoap/
-           │       │   ├── coap_client/
-           │       │   │   ├── autogen.template
-           │       │   │   ├── build/
-           │       │   │   │   └── editorconfig.template
-           │       │   │   ├── configure.template
-           │       │   │   ├── Makefile.template
-           │       │   │   ├── README.template
-           │       │   │   └── src/
-           │       │   │       ├── client_api.template
-           │       │   │       ├── main.template
-           │       │   │       ├── Makefile.template
-           │       │   │       ├── print_error.template
-           │       │   │       ├── print_success.template
-           │       │   │       ├── print_usage.template
-           │       │   │       ├── print_verbose.template
-           │       │   │       ├── process_options.template
-           │       │   │       └── time_handler.template
-           │       │   └── coap_server/
-           │       │       ├── autogen.template
-           │       │       ├── build/
-           │       │       │   └── editorconfig.template
-           │       │       ├── configure.template
-           │       │       ├── Makefile.template
-           │       │       ├── README.template
-           │       │       └── src/
-           │       │           ├── get_date.template
-           │       │           ├── get_full.template
-           │       │           ├── get_time.template
-           │       │           ├── main.template
-           │       │           ├── Makefile.template
-           │       │           ├── server_api.template
-           │       │           └── time_handler.template
-           │       ├── node_coap/
-           │       │   ├── client.template
-           │       │   └── server.template
-           │       ├── template_coapthon.yaml
-           │       ├── template_libcoap.yaml
-           │       └── template_node_coap.yaml
-           ├── __init__.py
-           ├── log/
-           │   └── gen_coap_service.log
-           ├── pro/
-           │   ├── __init__.py
-           │   ├── read_template.py
-           │   └── write_template.py
-           ├── py.typed
-           └── run/
-               └── gen_coap_service_run.py
-    
-    16 directories, 46 files
+         ├── core/
+         │   ├── __init__.py
+         │   ├── model/
+         │   │   ├── __init__.py
+         │   │   └── project_setup.py
+         │   └── service/
+         │       ├── engine.py
+         │       ├── __init__.py
+         │       ├── iservice.py
+         │       └── isubprocessor.py
+         ├── engine.py
+         ├── infrastructure/
+         │   ├── cli/
+         │   │   ├── engine.py
+         │   │   ├── icli.py
+         │   │   ├── __init__.py
+         │   │   └── setup/
+         │   │       ├── bundle.py
+         │   │       ├── dep_validator.py
+         │   │       ├── dependencies.py
+         │   │       ├── factory.py
+         │   │       ├── __init__.py
+         │   │       ├── keys.py
+         │   │       ├── opt_validator.py
+         │   │       ├── options.py
+         │   │       ├── registry.py
+         │   │       └── validator.py
+         │   ├── command/
+         │   │   ├── command.py
+         │   │   ├── gen_coap_service_command_definition.py
+         │   │   ├── gen_coap_service_command_executor.py
+         │   │   ├── icommand_definition.py
+         │   │   ├── icommand_executor.py
+         │   │   └── __init__.py
+         │   ├── config/
+         │   │   ├── gen_coap_service.cfg
+         │   │   ├── gen_coap_service.logo
+         │   │   ├── scheme.json
+         │   │   └── templates.tgz
+         │   └── subprocessor.py
+         ├── __init__.py
+         ├── log/
+         │   └── gen_coap_service.log
+         ├── py.typed
+         ├── run/
+         │   └── gen_coap_service_run.py
+         └── setup/
+             ├── bundle.py
+             ├── dep_validator.py
+             ├── dependencies.py
+             ├── factory.py
+             ├── __init__.py
+             ├── keys.py
+             ├── opt_validator.py
+             ├── options.py
+             ├── registry.py
+             └── validator.py
 
-Copyright and licence
-----------------------
+     12 directories, 46 files
 
-|license: gpl v3| |license: apache 2.0|
+✨ Features
+-----------
 
-.. |license: gpl v3| image:: https://img.shields.io/badge/license-gplv3-blue.svg
-   :target: https://www.gnu.org/licenses/gpl-3.0
+* Automatically scaffolds CoAP service projects (coapthon, libcoap, node_coap).
+* Provides a modular and extensible architecture based on OOP and SOLID principles.
+* Includes command line interface (CLI) support via a command/executor structure.
+* Robust validation of project bundles, dependencies, and options.
+* Comes with configurable templates and JSON schema definitions.
+* High code quality with full type checking and 100% unit test coverage.
 
-.. |license: apache 2.0| image:: https://img.shields.io/badge/license-apache%202.0-blue.svg
-   :target: https://opensource.org/licenses/apache-2.0
+📊 Code coverage
+----------------
 
-Copyright (C) 2020 - 2026 by `vroncevic.github.io/gen_coap_service <https://vroncevic.github.io/gen_coap_service>`_
+.. csv-table:: Code coverage
+   :file: coverage_table.csv
+   :widths: 60, 10, 10, 20
+   :header-rows: 1
+
+🛠 Usage
+--------
+
+Install package
+
+.. code-block:: bash
+
+    pip3 install gen_coap_service
+
+Prepare main entry point by downloading `main.py` or create your own.
+
+.. code-block:: bash
+
+    wget -O main.py https://raw.githubusercontent.com/vroncevic/gen_coap_service/main/main.py
+
+Running tool for creating new CoAP service project
+
+.. code-block:: bash
+
+    python3 main.py create --name myapp --type coapthon --output ./demo/
+
+📚 Docs
+-------
+
+More documentation and info at
+
+* `gen_coap_service.readthedocs.io <https://gen-coap_service.readthedocs.io>`_
+* `www.python.org <https://www.python.org/>`_
+
+👥 Contributing
+---------------
+
+`Contributing to gen_coap_service <https://github.com/vroncevic/gen_coap_service/blob/dev/CONTRIBUTING.md>`_
+
+📄 Copyright and licence
+-------------------------
+
+Copyright (C) 2025 - 2026 by `vroncevic.github.io/gen_coap_service <https://vroncevic.github.io/gen_coap_service>`_
 
 **gen_coap_service** is free software; you can redistribute it and/or modify
 it under the same terms as Python itself, either Python version 3.x or,
 at your option, any later version of Python 3 you may have available.
 
 Lets help and support PSF.
-
-|python software foundation|
-
-.. |python software foundation| image:: https://raw.githubusercontent.com/vroncevic/gen_coap_service/dev/docs/psf-logo-alpha.png
-   :target: https://www.python.org/psf/
-
-|donate|
-
-.. |donate| image:: https://www.paypalobjects.com/en_us/i/btn/btn_donatecc_lg.gif
-   :target: https://www.python.org/psf/donations/
-
-Indices and tables
-------------------
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`

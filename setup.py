@@ -6,12 +6,12 @@ Module
     setup.py
 Copyright
     Copyright (C) 2020 - 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_coap_service is free software: you can redistribute it and/or
-    modify it under the terms of the GNU General Public License as published
-    by the Free Software Foundation, either version 3 of the License, or
+    gen_coap_service is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the
+    Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_coap_service is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    gen_coap_service is distributed in the hope that it will be useful, but
+    WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
     You should have received a copy of the GNU General Public License along
@@ -20,34 +20,51 @@ Info
     Defines setup for tool gen_coap_service.
 '''
 
-from __future__ import print_function
-from typing import List, Optional
-from os.path import abspath, dirname, join
-from setuptools import setup
+from os import walk
+from os.path import abspath, dirname, join, relpath
+from setuptools import setup, find_packages
 
 __author__: str = 'Vladimir Roncevic'
 __copyright__: str = '(C) 2026, https://vroncevic.github.io/gen_coap_service'
-__credits__: List[str] = ['Vladimir Roncevic', 'Python Software Foundation']
+__credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__: str = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
 __version__: str = '1.1.6'
 __maintainer__: str = 'Vladimir Roncevic'
 __email__: str = 'elektron.ronca@gmail.com'
 __status__: str = 'Updated'
 
-TOOL_DIR: str = 'gen_coap_service/'
-CONF: str = 'conf'
-TEMPLATE: str = 'conf/template'
-LOG: str = 'log'
 THIS_DIR: str = abspath(dirname(__file__))
-long_description: Optional[str] = None
+long_description: str | None = None
+
 with open(join(THIS_DIR, 'README.md'), encoding='utf-8') as readme:
     long_description = readme.read()
+
 PROGRAMMING_LANG: str = 'Programming Language :: Python ::'
-VERSIONS: List[str] = ['3.10', '3.11', '3.12']
-SUPPORTED_PY_VERSIONS: List[str] = [
-    f'{PROGRAMMING_LANG} {VERSION}' for VERSION in VERSIONS
-]
-PYP_CLASSIFIERS: List[str] = SUPPORTED_PY_VERSIONS
+VERSIONS: list[str] = ['3.12', '3.13', '3.14']
+SUPPORTED_PY_VERSIONS: list[str] = [f'{PROGRAMMING_LANG} {VERSION}' for VERSION in VERSIONS]
+PYP_CLASSIFIERS: list[str] = SUPPORTED_PY_VERSIONS
+
+def find_package_data(pkg: str) -> list[str]:
+    '''
+        Finds all files in package to include in package_data.
+
+        :param pkg: Package folder name.
+        :type pkg: <str>
+        :return: List of package files relative to the package folder.
+        :rtype: <list[str]>
+        :exceptions: None.
+    '''
+    package_data: list[str] = []
+    for root, dirs, files in walk(pkg):
+        dirs[:] = [d for d in dirs if d != '__pycache__']
+        for file in files:
+            if file.endswith('.pyc') or file == '.editorconfig':
+                continue
+            full_path: str = join(root, file)
+            rel_path: str = relpath(full_path, pkg)
+            package_data.append(rel_path)
+    return package_data
+
 setup(
     name='gen_coap_service',
     version='1.1.6',
@@ -61,56 +78,7 @@ setup(
     keywords='Unix, Linux, Development, CoAP, Modules',
     platforms='POSIX',
     classifiers=PYP_CLASSIFIERS,
-    packages=['gen_coap_service', 'gen_coap_service.pro'],
+    packages=find_packages(exclude=['tests', 'tests.*', '*.*.pyc', '*.pyo']),
     install_requires=['ats-utilities'],
-    package_data={
-        'gen_coap_service': [
-            'py.typed',
-            f'{CONF}/gen_coap_service.logo',
-            f'{CONF}/gen_coap_service.cfg',
-            f'{CONF}/gen_coap_service_util.cfg',
-            f'{CONF}/project.yaml',
-            f'{TEMPLATE}/template_coapthon.yaml',
-            f'{TEMPLATE}/template_libcoap.yaml',
-            f'{TEMPLATE}/template_node_coap.yaml',
-            f'{TEMPLATE}/coapthon/basic_resources.template',
-            f'{TEMPLATE}/coapthon/coap_client.template',
-            f'{TEMPLATE}/coapthon/coap_server.template',
-            f'{TEMPLATE}/coapthon/logging.template',
-            f'{TEMPLATE}/libcoap/coap_client/build/editorconfig.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/client_api.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/main.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/Makefile.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/print_error.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/print_success.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/print_usage.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/print_verbose.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/process_options.template',
-            f'{TEMPLATE}/libcoap/coap_client/src/time_handler.template',
-            f'{TEMPLATE}/libcoap/coap_client/autogen.template',
-            f'{TEMPLATE}/libcoap/coap_client/configure.template',
-            f'{TEMPLATE}/libcoap/coap_client/Makefile.template',
-            f'{TEMPLATE}/libcoap/coap_client/README.template',
-            f'{TEMPLATE}/libcoap/coap_server/build/editorconfig.template',
-            f'{TEMPLATE}/libcoap/coap_server/src/get_date.template',
-            f'{TEMPLATE}/libcoap/coap_server/src/get_full.template',
-            f'{TEMPLATE}/libcoap/coap_server/src/get_time.template',
-            f'{TEMPLATE}/libcoap/coap_server/src/main.template',
-            f'{TEMPLATE}/libcoap/coap_server/src/Makefile.template',
-            f'{TEMPLATE}/libcoap/coap_server/src/server_api.template',
-            f'{TEMPLATE}/libcoap/coap_server/src/time_handler.template',
-            f'{TEMPLATE}/libcoap/coap_server/autogen.template',
-            f'{TEMPLATE}/libcoap/coap_server/configure.template',
-            f'{TEMPLATE}/libcoap/coap_server/Makefile.template',
-            f'{TEMPLATE}/libcoap/coap_server/README.template',
-            f'{TEMPLATE}/node_coap/client.template',
-            f'{TEMPLATE}/node_coap/server.template',
-            f'{LOG}/gen_coap_service.log'
-        ]
-    },
-    data_files=[(
-        '/usr/local/bin/', [
-            f'{TOOL_DIR}run/gen_coap_service_run.py'
-        ]
-    )]
+    package_data={'gen_coap_service': find_package_data('gen_coap_service')}
 )

@@ -16,14 +16,16 @@ Copyright
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Initialization module for the gen_coap_service.
+    Initializes the gen_coap_service.setup package.
 '''
 
-__author__: str = 'Vladimir Roncevic'
-__copyright__: str = '(C) 2026, https://vroncevic.github.io/gen_coap_service'
-__credits__: list[str] = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__: str = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__: str = '1.1.6'
-__maintainer__: str = 'Vladimir Roncevic'
-__email__: str = 'elektron.ronca@gmail.com'
-__status__: str = 'Development'
+from __future__ import annotations
+
+__author__ = 'Vladimir Roncevic'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_coap_service'
+__credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
+__license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
+__version__ = '1.1.6'
+__maintainer__ = 'Vladimir Roncevic'
+__email__ = 'elektron.ronca@gmail.com'
+__status__ = 'Updated'
