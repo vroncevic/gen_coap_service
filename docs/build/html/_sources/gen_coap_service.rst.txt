@@ -7,7 +7,16 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   gen_coap_service.pro
+   gen_coap_service.core
+   gen_coap_service.setup
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gen_coap_service.engine
 
 Module contents
 ---------------

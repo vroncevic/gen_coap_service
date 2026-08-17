@@ -1,0 +1,35 @@
+{
+    "coapthon": {
+        "source_dir": "coapthon",
+        "path_replacements": {
+            "base": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "libcoap": {
+        "source_dir": "libcoap",
+        "path_replacements": {
+            "base": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    },
+    "node_coap": {
+        "source_dir": "node_coap",
+        "path_replacements": {
+            "base": "project_name"
+        },
+        "exclude": [
+            "**/.coverage",
+            "**/.vscode/**",
+            "**/.git/**"
+        ]
+    }
+}

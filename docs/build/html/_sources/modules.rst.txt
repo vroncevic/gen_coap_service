@@ -5,3 +5,4 @@ gen_coap_service
    :maxdepth: 4
 
    gen_coap_service
+   main
