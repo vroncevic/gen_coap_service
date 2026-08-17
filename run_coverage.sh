@@ -7,5 +7,6 @@
 # @author  Vladimir Roncevic <elektron.ronca@gmail.com>
 #
 
-python3 ats_coverage.py
+python3 coverage/ats_coverage.py gen_coap_service
+pylint gen_coap_service > gen_coap_service.report
 echo "Done"

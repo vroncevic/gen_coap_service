@@ -23,8 +23,9 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 
-from ats_utilities.validation.check_type import istype
+from ats_utilities.exceptions import ATSValueError, ATSTypeError
 from ats_utilities.validation.check_value import not_none
+from ats_utilities.validation.check_type import istype
 
 from gen_coap_service.setup.options import GenCoAPServiceBundleOptions
 from gen_coap_service.setup.keys import GenCoAPServiceBundleKeys
@@ -47,6 +48,7 @@ class GenCoAPServiceBundleOptionsValidator:
 
             :methods:
                 | validate - Validates the gen_coap_service bundle options.
+                | is_valid - Checks if the gen_coap_service bundle options is valid.
     '''
 
     @classmethod
@@ -73,3 +75,18 @@ class GenCoAPServiceBundleOptionsValidator:
             attribute = options.get(attr_name)
 
             istype(attribute, expected_type, ctx, msg_attr_name_istype)
+
+    @classmethod
+    def is_valid(cls, gencoapservicebundleoptions: GenCoAPServiceBundleOptions) -> bool:
+        '''
+            Checks if the gencoapservicebundleoptions is valid.
+
+            :param gencoapservicebundleoptions: The gencoapservicebundleoptions to be checked.
+            :return: True if valid, False otherwise.
+        '''
+        try:
+            cls.validate(gencoapservicebundleoptions)
+            return True
+
+        except (ATSValueError, ATSTypeError):
+            return False

@@ -63,6 +63,7 @@ class GenCoAPServiceBundleFactory:
                 | _info_file - Path to the gen_coap_service info file.
             :methods:
                 | create_bundle - Creates the gen_coap_service bundle with optional pre-configured options.
+                | get_version - Returns the factory version.
     '''
 
     _info_file: str = 'gen_coap_service/infrastructure/config/gen_coap_service.cfg'
@@ -129,3 +130,13 @@ class GenCoAPServiceBundleFactory:
                 cli=cli
             )
         )
+
+    @classmethod
+    def get_version(cls) -> str:
+        '''
+            Returns the factory version.
+
+            :return: The factory version.
+            :exceptions: None.
+        '''
+        return __version__

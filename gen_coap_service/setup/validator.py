@@ -22,6 +22,7 @@ Info
 from __future__ import annotations
 
 from ats_utilities.base.setup.bundle import BaseBundle
+from ats_utilities.exceptions import ATSValueError, ATSTypeError
 from ats_utilities.validation.check_value import not_none
 from ats_utilities.validation.check_type import istype
 
@@ -48,6 +49,7 @@ class GenCoAPServiceBundleValidator:
 
             :methods:
                 | validate - Validates the gen_coap_service bundle.
+                | is_valid - Checks if the gen_coap_service bundle is valid.
     '''
 
     @classmethod
@@ -85,3 +87,18 @@ class GenCoAPServiceBundleValidator:
         istype(bundle.service, IService, ctx, msg_service_istype)
         istype(bundle.subprocessor, ISubProcessor, ctx, msg_subprocessor_istype)
         istype(bundle.cli, ICLI, ctx, msg_cli_istype)
+
+    @classmethod
+    def is_valid(cls, gencoapservicebundle: GenCoAPServiceBundle) -> bool:
+        '''
+            Checks if the gencoapservicebundle is valid.
+
+            :param gencoapservicebundle: The gencoapservicebundle to be checked.
+            :return: True if valid, False otherwise.
+        '''
+        try:
+            cls.validate(gencoapservicebundle)
+            return True
+
+        except (ATSValueError, ATSTypeError):
+            return False
