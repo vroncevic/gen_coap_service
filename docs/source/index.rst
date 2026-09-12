@@ -9,7 +9,7 @@ The README is used to introduce the tool and provide instructions on
 how to install the tool, any machine dependencies it may have and any
 other information that should be provided before the tool is installed.
 
-|gen_coap_service python checker| |gen_coap_service python package| |github issues| |documentation status| |github contributors|
+|gen_coap_service python checker| |gen_coap_service python package| |gen_coap_service interface checker| |gen_coap_service isp checker| |gen_coap_service srp checker| |github issues| |documentation status| |github contributors|
 
 .. |gen_coap_service python checker| image:: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python_checker.yml/badge.svg
    :target: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python_checker.yml
@@ -17,14 +17,23 @@ other information that should be provided before the tool is installed.
 .. |gen_coap_service python package| image:: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_package_checker.yml/badge.svg
    :target: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_package.yml
 
+.. |gen_coap_service interface checker| image:: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_interface_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_interface_checker.yml
+
+.. |gen_coap_service isp checker| image:: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_isp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_isp_checker.yml
+
+.. |gen_coap_service srp checker| image:: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_srp_checker.yml/badge.svg
+   :target: https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_srp_checker.yml
+
 .. |github issues| image:: https://img.shields.io/github/issues/vroncevic/gen_coap_service.svg
    :target: https://github.com/vroncevic/gen_coap_service/issues
 
 .. |github contributors| image:: https://img.shields.io/github/contributors/vroncevic/gen_coap_service.svg
    :target: https://github.com/vroncevic/gen_coap_service/graphs/contributors
 
-.. |documentation status| image:: https://readthedocs.org/projects/gen-coap_service/badge/?version=latest
-   :target: https://gen-coap_service.readthedocs.io/en/latest/?badge=latest
+.. |documentation status| image:: https://readthedocs.org/projects/gen-coap-service/badge/?version=latest
+   :target: https://gen-coap-service.readthedocs.io/en/latest/?badge=latest
 
 .. toctree::
    :maxdepth: 4
@@ -186,7 +195,7 @@ Running tool for creating new CoAP service project
 
 More documentation and info at
 
-* `gen_coap_service.readthedocs.io <https://gen-coap_service.readthedocs.io>`_
+* `gen_coap_service.readthedocs.io <https://gen-coap-service.readthedocs.io>`_
 * `www.python.org <https://www.python.org/>`_
 
 👥 Contributing

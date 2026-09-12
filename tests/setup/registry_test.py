@@ -72,4 +72,4 @@ class TestGenCoAPServiceBundleRegistry(unittest.TestCase):
             GenCoAPServiceBundleRegistry.create_bundle(None)
 
     def test_get_version(self) -> None:
-        self.assertEqual(GenCoAPServiceBundleRegistry.get_version(), '1.1.7')
+        self.assertEqual(GenCoAPServiceBundleRegistry.get_version(), '1.1.8')
