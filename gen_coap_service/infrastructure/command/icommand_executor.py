@@ -27,15 +27,14 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/gen_coap_service'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.7'
+__version__ = '1.1.8'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-# pylint: disable=too-few-public-methods
 @runtime_checkable
-class ICommandExecutor[ParametersType, ReturnType, ServiceType](Protocol):
+class ICommandExecutor[DefinitionType, ParametersType, ReturnType, ServiceType](Protocol):
     '''
         Abstract ICommandExecutor strategy interface.
 
@@ -52,4 +51,11 @@ class ICommandExecutor[ParametersType, ReturnType, ServiceType](Protocol):
             :param params: The command parameters parsed from CLI.
             :param service: The service instance.
             :return: The execution result.
+        '''
+
+    def get_definition(self) -> DefinitionType:
+        '''
+            Returns the command definition metadata.
+
+            :return: The command definition metadata.
         '''

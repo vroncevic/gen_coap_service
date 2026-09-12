@@ -55,3 +55,8 @@ class TestGenCoAPServiceCommand(unittest.TestCase):
         definition = GenCoAPServiceCommandDefinition()
         executor = GenCoAPServiceCommandExecutor(definition)
         self.assertTrue(isinstance(str(executor), str))
+
+    def test_executor_get_definition(self) -> None:
+        definition = GenCoAPServiceCommandDefinition()
+        executor = GenCoAPServiceCommandExecutor(definition)
+        self.assertEqual(executor.get_definition(), definition)

@@ -10,7 +10,7 @@ The README is used to introduce the tool and provide instructions on
 how to install the tool, any machine dependencies it may have and any
 other information that should be provided before the tool is installed.
 
-[![gen_coap_service python checker](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python_checker.yml) [![gen_coap_service package checker](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_package.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_coap_service.svg)](https://github.com/vroncevic/gen_coap_service/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_coap_service.svg)](https://github.com/vroncevic/gen_coap_service/graphs/contributors)
+[![gen_coap_service python checker](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_python_checker.yml) [![gen_coap_service package checker](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_package.yml) [![gen_coap_service interface checker](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_interface_checker.yml/badge.svg)](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_interface_checker.yml) [![gen_coap_service isp checker](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_isp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_isp_checker.yml) [![gen_coap_service srp checker](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_srp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_coap_service/actions/workflows/gen_coap_service_srp_checker.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_coap_service.svg)](https://github.com/vroncevic/gen_coap_service/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_coap_service.svg)](https://github.com/vroncevic/gen_coap_service/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -190,7 +190,7 @@ Tool structure
 
 | Name | Stmts | Miss | Cover |
 |------|-------|------|-------|
-| `gen_coap_service/__init__.py` | 8 | 0 | 100%|
+| `gen_coap_service/__init__.py` | 9 | 0 | 100%|
 | `gen_coap_service/core/__init__.py` | 9 | 0 | 100%|
 | `gen_coap_service/core/model/__init__.py` | 9 | 0 | 100%|
 | `gen_coap_service/core/model/project_setup.py` | 14 | 0 | 100%|
@@ -215,21 +215,21 @@ Tool structure
 | `gen_coap_service/infrastructure/command/__init__.py` | 9 | 0 | 100%|
 | `gen_coap_service/infrastructure/command/command.py` | 16 | 0 | 100%|
 | `gen_coap_service/infrastructure/command/gen_coap_service_command_definition.py` | 24 | 0 | 100%|
-| `gen_coap_service/infrastructure/command/gen_coap_service_command_executor.py` | 21 | 0 | 100%|
+| `gen_coap_service/infrastructure/command/gen_coap_service_command_executor.py` | 23 | 0 | 100%|
 | `gen_coap_service/infrastructure/command/icommand_definition.py` | 14 | 0 | 100%|
-| `gen_coap_service/infrastructure/command/icommand_executor.py` | 13 | 0 | 100%|
+| `gen_coap_service/infrastructure/command/icommand_executor.py` | 14 | 0 | 100%|
 | `gen_coap_service/infrastructure/subprocessor.py` | 57 | 0 | 100%|
 | `gen_coap_service/setup/__init__.py` | 9 | 0 | 100%|
 | `gen_coap_service/setup/bundle.py` | 23 | 0 | 100%|
 | `gen_coap_service/setup/dep_validator.py` | 36 | 0 | 100%|
 | `gen_coap_service/setup/dependencies.py` | 19 | 0 | 100%|
-| `gen_coap_service/setup/factory.py` | 48 | 0 | 100%|
+| `gen_coap_service/setup/factory.py` | 49 | 0 | 100%|
 | `gen_coap_service/setup/keys.py` | 27 | 0 | 100%|
 | `gen_coap_service/setup/opt_validator.py` | 34 | 0 | 100%|
 | `gen_coap_service/setup/options.py` | 12 | 0 | 100%|
 | `gen_coap_service/setup/registry.py` | 32 | 0 | 100%|
 | `gen_coap_service/setup/validator.py` | 48 | 0 | 100%|
-| **Total** | 929 | 0 | 100% |
+| **Total** | 934 | 0 | 100% |
 
 </details>
 
@@ -256,11 +256,11 @@ python3 main.py create --name myapp --type coapthon --output ./demo/
 
 ### 📚 Docs
 
-[![Documentation Status](https://readthedocs.org/projects/gen-coap_service/badge/?version=latest)](https://gen-coap_service.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/gen-coap-service/badge/?version=latest)](https://gen-coap-service.readthedocs.io/en/latest/?badge=latest)
 
 More documentation and info at
 
-* [gen_coap_service.readthedocs.io](https://gen-coap_service.readthedocs.io)
+* [gen_coap_service.readthedocs.io](https://gen-coap-service.readthedocs.io)
 * [www.python.org](https://www.python.org/)
 
 ### 👥 Contributing

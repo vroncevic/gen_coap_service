@@ -32,7 +32,7 @@ __author__ = 'Vladimir Roncevic'
 __copyright__ = '(C) 2026, https://vroncevic.github.io/gen_coap_service'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
 __license__ = 'https://github.com/vroncevic/gen_coap_service/blob/dev/LICENSE'
-__version__ = '1.1.7'
+__version__ = '1.1.8'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -48,6 +48,7 @@ class GenCoAPServiceCommandExecutor:
                 | definition - The command CLI metadata definition.
             :methods:
                 | execute - Executes the subcommand.
+                | get_definition - Returns the command definition metadata.
                 | __str__ - Returns the GenCoAPServiceCommandExecutor as string representation.
     '''
 
@@ -58,6 +59,7 @@ class GenCoAPServiceCommandExecutor:
             Initializes the command executor.
 
             :param definition: The command definition metadata.
+            :exceptions: None.
         '''
         self.definition = definition
 
@@ -68,15 +70,26 @@ class GenCoAPServiceCommandExecutor:
             :param params: Subcommand parameters from CLI parser.
             :param service: Command orchestrator service instance.
             :return: The result of the subcommand execution.
+            :exceptions: None.
         '''
         return service.execute(params=params) if service.is_initialized() else {
             'returncode': 1, 'stdout': '', 'stderr': 'service not initialized'
         }
+
+    def get_definition(self) -> ICommandDefinition:
+        '''
+            Returns the command definition metadata.
+
+            :return: The command definition metadata.
+            :exceptions: None.
+        '''
+        return self.definition
 
     def __str__(self) -> str:
         '''
             Returns the GenCoAPServiceCommandExecutor as string representation.
 
             :return: The GenCoAPServiceCommandExecutor as string representation.
+            :exceptions: None.
         '''
         return to_str(self)
